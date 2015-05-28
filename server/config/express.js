@@ -54,9 +54,9 @@ var expressConfig = function(app, express) {
     );
   }
   // Load favicon
-  app.use(favicon(path.join(settings.root, settings.staticAssets,
-    '/favicon.ico'))
-  );
+  // app.use(favicon(path.join(settings.root, settings.staticAssets,
+  //   '/favicon.ico'))
+  // );
   // Load static assets
   app.use(express.static(path.join(settings.root, settings.staticAssets),
     {maxAge: week})
