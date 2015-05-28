@@ -13,7 +13,7 @@ var routes = function(app) {
   // Dynamically load all routes
   fs.readdirSync(__dirname).forEach(function(file) {
     // Dont load this index.js file
-    if (!/index/.test(file)) {
+    if (!/index/.test(file) && !/.DS_Store/.test(file)) {
       var route = path.join(__dirname, file);
       require(route)(app);
     }
