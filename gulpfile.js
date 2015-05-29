@@ -2,16 +2,21 @@
 
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
-var stylish = require('jshint-stylish');
+var jscs = require('gulp-jscs');
+var stylish = require('gulp-jscs-stylish');
 var livereload = require('gulp-livereload');
 var mocha = require('gulp-mocha');
 var gutil = require('gulp-util');
+var noop = function () {};
 
 // run 'gulp jshint' in the console to run jshint on every .js file under the server folder
 // and all its sub folders
-gulp.task("jshint", function(){
+gulp.task("lint", function(){
   gulp.src("./server/**/*.js")
     .pipe(jshint())
+    .pipe(jscs())
+    .on('error', noop)
+    .pipe(stylish.combineWithHintResults())
     .pipe(jshint.reporter("jshint-stylish"));
 });
 
