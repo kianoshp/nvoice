@@ -15,6 +15,7 @@ gulp.task("jshint", function(){
     .pipe(jshint.reporter("jshint-stylish"));
 });
 
+// run 'gulp test' to run test suite
 gulp.task('test', function(){
   return gulp.src(['./test/**/*.js'], {read: false})
     .pipe(mocha({reporter: 'nyan'}))
