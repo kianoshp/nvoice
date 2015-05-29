@@ -19,7 +19,7 @@ gulp.task("jshint", function(){
 gulp.task('test', function(){
   return gulp.src(['./test/**/*.js'], {read: false})
     .pipe(mocha({reporter: 'nyan'}))
-    .on('error',gutil.log);
+    .on('error', gutil.log);
 });
 
 // run 'gulp watch' to watch all .js files and have livereload listen for changes
