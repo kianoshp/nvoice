@@ -39,6 +39,8 @@
     "superagent": "^1.1.0"
   },
   "devDependencies": {
-    "gulp": "^3.8.11"
+    "gulp": "^3.8.11",
+    "gulp-jshint": "^1.11.0",
+    "jshint-stylish": "^2.0.0"
   }
 }
