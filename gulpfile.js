@@ -9,7 +9,7 @@ var mocha = require('gulp-mocha');
 var gutil = require('gulp-util');
 var noop = function () {};
 
-// run 'gulp jshint' in the console to run jshint on every .js file under the server folder
+// run 'gulp lint' in the console to run jshint and jscs on every .js file under the server folder
 // and all its sub folders
 gulp.task("lint", function(){
   gulp.src("./server/**/*.js")
