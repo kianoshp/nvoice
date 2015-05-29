@@ -42,6 +42,8 @@
     "gulp": "^3.8.11",
     "gulp-jshint": "^1.11.0",
     "gulp-livereload": "^3.8.0",
+    "gulp-mocha": "^2.1.0",
+    "gulp-util": "^3.0.4",
     "jshint-stylish": "^2.0.0"
   }
 }
