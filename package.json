@@ -37,5 +37,8 @@
     "ramda": "^0.13.0",
     "serve-favicon": "^2.2.0",
     "superagent": "^1.1.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11"
   }
 }
