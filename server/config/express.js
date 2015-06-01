@@ -28,6 +28,9 @@ var expressConfig = function(app, express) {
   // Get current server environment
   var env = app.get('env');
 
+  // Create path to access.log file
+  var logPath = path.join(__dirname, 'log', 'access.log');
+
   // Remove x-powered-by header (doesn't let clients know we are using Express)
   app.disable('x-powered-by');
 
@@ -84,10 +87,18 @@ var expressConfig = function(app, express) {
   app.use(passport.session());
   passportConfig(passport);
 
-  // Setup writing to log file
-  app.use(logger('common', {
-    stream: fs.createWriteStream(__dirname + '/../log/access.log', {flags: 'a'})
-  }));
+  // If access.log exists, then use it to store logs, otherwise
+  // create it
+  if(fs.existsSync(logPath)){
+    app.use(logger('common', {
+      stream: fs.createWriteStream(logPath, {flags: 'a'})
+    }));
+    console.log('access.log exists!');
+  } else {
+    fs.mkdirSync(path.dirname(logPath));
+    fs.writeFileSync(logPath, {flags: 'wx'});
+    console.log('access.log created!');
+  }
 
   // Setup log level for server console output
   app.use(logger(settings.server.logLevel));
