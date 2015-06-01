@@ -9,3 +9,4 @@ server/config/secrets.js
 .yo-rc.json
 .idea/
 assets/scripts/bundle*.js
+server/log/access.log

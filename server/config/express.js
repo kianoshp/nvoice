@@ -14,6 +14,7 @@ var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var passport = require('passport');
 var passportConfig = require('./passport-config');
+var fs = require('fs');
 
 // Configuration files
 var settings = require('./env/default');
@@ -82,6 +83,11 @@ var expressConfig = function(app, express) {
   app.use(passport.initialize());
   app.use(passport.session());
   passportConfig(passport);
+
+  // Setup writing to log file
+  app.use(logger('common', {
+    stream: fs.createWriteStream(__dirname + '/../log/access.log', {flags: 'a'})
+  }));
 
   // Setup log level for server console output
   app.use(logger(settings.server.logLevel));
