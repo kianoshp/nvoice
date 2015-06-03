@@ -22,7 +22,7 @@ gulp.task("lint", function(){
 
 // run 'gulp test' to run test suite
 gulp.task('test', function(){
-  return gulp.src(['./test/**/*.js'], {read: false})
+  return gulp.src(['./server/assets/tests/specs/*.js'], {read: false})
     .pipe(mocha({reporter: 'nyan'}))
     .on('error', gutil.log);
 });
