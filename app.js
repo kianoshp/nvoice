@@ -7,6 +7,7 @@
 var fs = require('fs');
 var https = require('https');
 var express = require('express');
+var db = require('./server/api/models/db.js');
 
 // Add coloring for console output
 require('colors');
