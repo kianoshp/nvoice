@@ -23,16 +23,16 @@ var credentials = {
 var app = express();
 
 // ignoring the self signed certs in dev environment
-// if(app.get('env') === 'development') {
-//   process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-// }
+if(app.get('env') === 'development') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+}
 
 // Express configuration
 require('./server/config/express')(app, express);
 
 // Start Express server.
 https.createServer(credentials, app)
-  .listen(app.get('port'), function() {
+  .listen(app.get('securePort'), function() {
     console.log('✔ Express server listening on port '.green + '%d'.blue + ' in '.green + '%s'.blue + ' mode'.green, app.get('securePort'), app.get('env'));
 });
 
