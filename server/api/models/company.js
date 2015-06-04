@@ -35,7 +35,7 @@ var CompanySchema = new db.Schema({
   },
   clients: [{
     type: db.Schema.ObjectId,
-    ref: 'Client'
+    ref: 'Company'
   }],
   phone: {
     type: String,
