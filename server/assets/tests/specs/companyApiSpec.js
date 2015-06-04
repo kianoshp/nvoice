@@ -3,6 +3,8 @@ var mongoose = require('mongoose');
 var superagent = require('superagent');
 
 describe('Company Api tests', function(){
+  this.timeout(30000);
+
   var URL = 'https://localhost:4443';
   var companyObj = {
     company: {
@@ -98,7 +100,7 @@ describe('Company Api tests', function(){
 
     describe('Client services', function(){
       it('should create a client', function(done){
-        clientObj.parentCompany = companyObject._id;
+        clientObj.parentCompany = companyObj._id;
         superagent.post(URL + '/company/create')
           .send(clientObj)
           .send({parentCompanyId: currentCompanyId})
