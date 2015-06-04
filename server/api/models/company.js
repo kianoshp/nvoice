@@ -6,6 +6,10 @@ var CompanySchema = new db.Schema({
     type: String,
     required: true
   },
+  isParent: {
+    type: Boolean,
+    required: true
+  },
   address: {
     address1: {
       type: String,
