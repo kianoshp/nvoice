@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var connectionString = 'mongodb://localhost/nvoice.Db';
+var connectionString = 'mongodb://localhost/nvoice';
 
 mongoose.connect(connectionString);
 

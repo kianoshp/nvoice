@@ -33,7 +33,7 @@ var companyAPI = {
     return companyObject;
   },
 
-  createCompany: function(companyObj, userObj, parentCompanyId){
+  createCompany: function(companyObj, parentCompanyId){
     var self = this;
 
     companyObj.save(function(err){
@@ -44,17 +44,6 @@ var companyAPI = {
           self.addClienToCompany(parentCompanyId, doc._id);
         }
       });
-    });
-
-    userAPI.createUser(userObj, function(err, user){
-      if (err) {
-        companyObj.remove({
-          id: companyObj._id
-        });
-        return console.log(err);
-      }
-
-      companyAPI.companyObj.user = userObj;
     });
 
     companyAPI.companyObj.company = companyObj;
