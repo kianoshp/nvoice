@@ -53,6 +53,6 @@ httpRouter.get('*', function(req, res){
 });
 
 var httpServer = http.createServer(httpApp);
-httpServer.listen(8080);
+httpServer.listen(app.get('port'));
 
 module.exports = app;
