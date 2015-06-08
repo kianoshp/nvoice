@@ -21,16 +21,6 @@ describe('Company Api tests', function(){
       phone: "5184441234",
       email: "questions@bobinc.com",
       created: Date.now()
-    },
-    user: {
-      firstName: "Bob",
-      middleInitial: "",
-      lastName: "Bableberg",
-      password: "password",
-      email: "bigbob@bobinc.com",
-      phone: "5183214567",
-      role: "administrator",
-      mainContact: true
     }
   };
   var clientObj = {
@@ -48,16 +38,6 @@ describe('Company Api tests', function(){
       phone: "5182225190",
       email: "randy@gmail.com",
       created: Date.now()
-    },
-    user: {
-      firstName: "Randell",
-      middleInitial: "",
-      lastName: "Robertson",
-      password: "password",
-      email: "randy@gmail",
-      phone: "5181110101",
-      role: "administrator",
-      mainContact: true
     }
   };
   companyObj = {};

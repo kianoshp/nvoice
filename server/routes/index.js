@@ -15,7 +15,7 @@ var routes = function(app) {
     // Dont load this index.js file
     if (!/index/.test(file) && !/.DS_Store/.test(file)) {
       var route = path.join(__dirname, file);
-      require(route)(app);
+      require(route);
     }
   });
 

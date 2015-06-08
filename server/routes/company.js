@@ -1,14 +1,12 @@
 var express = require('express');
-var companyAPI = require('./../api/controllers/companies');
-var userAPI = require('./../api/controllers/users');
+var companyAPI = require('./../api/controllers/company');
 var router = express.Router();
 
 router.post('/company/create', function(req, res){
   var thisCompany = companyAPI.createCompanyObj(req);
-  var thisUser = userAPI.createUserObj(req, thisCompany);
   var parentCompanyId = req.body.parentCompanyId || null;
 
-  var newCompany = companyAPI.createCompany(thisCompany, thisUser, parentCompanyId);
+  var newCompany = companyAPI.createCompany(thisCompany, parentCompanyId);
 
   res.writeHead(200, {
     'Content-Type': 'application/json'
