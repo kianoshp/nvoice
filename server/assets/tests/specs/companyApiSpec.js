@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var superagent = require('superagent');
 
 describe('Company Api tests', function(){
-  this.timeout(30000);
 
   var URL = 'https://localhost:4443';
   var companyObj = {

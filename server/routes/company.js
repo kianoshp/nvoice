@@ -59,3 +59,5 @@ router.get('/client/search', function(req, res){
 router.put('/client/add', function(req, res){
   companyAPI.addClienToCompany(req.body.companyId, req.body.clientId);
 });
+
+module.exports = router;
