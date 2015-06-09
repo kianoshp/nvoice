@@ -32,7 +32,7 @@ var companyAPI = {
     var self = this;
 
     companyObj.save(function(err){
-      if (err) throw new Error('Company could not be created because of ' + err.message);
+      if (err) throw err;
     });
 
     companyAPI.company = companyObj;
