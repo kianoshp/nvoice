@@ -1,27 +1,29 @@
 var chai = require('chai');
 var mongoose = require('mongoose');
 var superagent = require('superagent');
+var request = require('supertest');
+var app = require('../../../../app');
 
 describe('Company Api tests', function(){
 
   var URL = 'https://localhost:4443';
   var companyObj = {
-    company: {
-      companyName: 'Bobs Buildings Inc.',
-      isParent: true,
-      address: {
-        address1: "55 Bob Avenue",
-        address2: "Suite 707",
-        city: "Bobopolis",
-        state: "Florida",
-        country: "United States",
-        zip: "09218"
-      },
-      clients: [],
-      phone: "5184441234",
-      email: "questions@bobinc.com",
-      created: Date.now()
-    }
+    companyName: 'Bobs Buildings Inc.',
+    isParent: true,
+    address: {
+      address1: "55 Bob Avenue",
+      address2: "Suite 707",
+      city: "Bobopolis",
+      state: "Florida",
+      country: "United States",
+      zip: "09218"
+    },
+    clients: [],
+    phone: "5184441234",
+    fax: '',
+    cell: '',
+    email: "questions@bobinc.com",
+    created: Date.now()
   };
   var clientObj = {
     company: {
@@ -69,30 +71,11 @@ describe('Company Api tests', function(){
           .end(function(err, res){
             companyObj = res.body.companyObj;
             currentCompanyId = res.body.company._id;
-            chai.expect(companyObject).to.exist;
-            chai.expect(companyObject).to.not.be.undefined;
-            chai.expect(companyObject.company.companyName).to.equal(companyObject.company.companyName);
+            chai.expect(companyObj).to.exist;
+            chai.expect(companyObj).to.not.be.undefined;
+            chai.expect(companyObj.companyName).to.equal(companyObj.companyName);
             done();
-          });
-      });
-    });
-
-    describe('Client services', function(){
-      it('should create a client', function(done){
-        clientObj.parentCompany = companyObj._id;
-        superagent.post(URL + '/company/create')
-          .send(clientObj)
-          .send({parentCompanyId: currentCompanyId})
-          .end(function(err, res){
-            if(err) return console.log(err);
-
-            var clientObj = res.body.companyObj;
-            currentClientId = clientObject._id;
-            chai.expect(clientObject).to.exist;
-            chai.expect(clientObject).to.not.be.undefined;
-            chai.expect(clientObject.company.companyName).to.equal(clientObj.company.companyName);
-            done();
-          });
+        });
       });
     });
 
@@ -107,43 +90,6 @@ describe('Company Api tests', function(){
             chai.expect(thisCompany).to.exist;
             chai.expect(thisCompany).to.not.be.undefined;
             chai.expect(thisCompany.companyName).to.equal(companyObj.company.companyName);
-            done();
-          });
-      });
-    });
-
-    describe('Update', function(){
-      it('should update a company', function(done){
-        superagent.put(URL + '/company/update')
-          .send({
-            companyObj: modifiedCompanyObj,
-            compandyId: currentCompanyId
-          })
-          .end(function(err, res){
-            if(err) return console.log(err);
-
-            var thisCompany = res.body;
-            chai.expect(thisCompany).to.exist;
-            chai.expect(thisCompany).to.not.be.undefined;
-            chai.expect(thisCompany.address.address1).to.equal(modifiedCompanyObj.address.address1);
-            chai.expect(thisCompany.address.address2).to.equal(modifiedCompanyObj.address.address2);
-            done();
-          });
-      });
-    });
-
-    describe('Delete', function(){
-      it('should delete a company and its clients and users', function(done){
-        superagent.del(URL + '/company/delete')
-          .send({
-            companyId: currentCompanyId
-          })
-          .end(function(err, res){
-            if(err) console.log(err);
-
-            chai.expect(res.body).to.exist;
-            chai.expect(res.body.status).to.equal('complete');
-            chai.expect(res.body.isRemoved).to.be.true;
             done();
           });
       });
