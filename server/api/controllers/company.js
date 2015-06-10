@@ -29,16 +29,13 @@ var companyAPI = {
   },
 
   createCompany: function(companyObj, cb){
-    var self = this;
-
-    companyObj.save(function(err, doc){
+    companyObj.save(function(err){
       if (err) throw err;
 
-      cb(null, doc);
+      cb(null);
     });
 
     companyAPI.company = companyObj;
-
     return companyAPI;
   },
 

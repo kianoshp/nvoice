@@ -25,41 +25,7 @@ describe('Company Api tests', function(){
     email: "questions@bobinc.com",
     created: Date.now()
   };
-  var clientObj = {
-    company: {
-      companyName: 'Randys Emporium',
-      isParent: false,
-      address: {
-        address1: "1 Emporium Way",
-        address2: "",
-        city: "Bobopolis",
-        state: "Florida",
-        country: "United States",
-        zip: "09218"
-      },
-      phone: "5182225190",
-      email: "randy@gmail.com",
-      created: Date.now()
-    }
-  };
   var currentCompanyId;
-  var currentClientId;
-  var modifiedCompanyObj = {
-    companyName: 'Bobs Buildings Inc.',
-    isParent: true,
-    address: {
-      address1: "101 Bob Avenue",
-      address2: "Suite 1000",
-      city: "Bobopolis",
-      state: "Florida",
-      country: "United States",
-      zip: "09218"
-    },
-    clients: [],
-    phone: "5184441234",
-    email: "questions@bobinc.com",
-    created: Date.now()
-  };
 
   describe('CRUD actions', function(){
 
