@@ -42,7 +42,6 @@ describe('Company Api tests', function(){
       created: Date.now()
     }
   };
-  companyObj = {};
   var currentCompanyId;
   var currentClientId;
   var modifiedCompanyObj = {
@@ -89,7 +88,7 @@ describe('Company Api tests', function(){
             var thisCompany = res.body;
             chai.expect(thisCompany).to.exist;
             chai.expect(thisCompany).to.not.be.undefined;
-            chai.expect(thisCompany.companyName).to.equal(companyObj.company.companyName);
+            chai.expect(thisCompany.companyName).to.equal(companyObj.companyName);
             done();
           });
       });

@@ -6,7 +6,10 @@ var company = function(app){
   app.post('/company/create', function(req, res){
     var thisCompany = companyAPI.createCompanyObj(req);
 
-    var newCompany = companyAPI.createCompany(thisCompany);
+    var newCompany = companyAPI.createCompany(thisCompany, function(err, company){
+      if (err) throw err;
+      res.json(company);
+    });
 
     res.writeHead(200, {
       'Content-Type': 'application/json'
@@ -18,6 +21,7 @@ var company = function(app){
     var companyId = req.query.companyId || req.body.companyId;
 
     companyAPI.readCompany(companyId, function(err, company){
+      if (err) throw err;
       res.json(company);
     });
   });
