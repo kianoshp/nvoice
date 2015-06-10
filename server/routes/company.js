@@ -8,7 +8,7 @@ var company = function(app){
 
     var newCompany = companyAPI.createCompany(thisCompany, function(err, company){
       if (err) throw err;
-      res.json(company);
+      // res.json(company);
     });
 
     res.writeHead(200, {
