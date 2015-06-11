@@ -30,17 +30,15 @@ var companyAPI = {
 
   createCompany: function(companyObj, cb){
     companyObj.save(function(err){
-      if (err) throw err;
 
-      cb(null, companyObj);
+      cb(err, companyObj);
     });
   },
 
   readCompany: function(companyId, cb){
     Company.findById(companyId, function(err, doc){
-      if (err) throw err;
 
-      cb(null, doc);
+      cb(err, doc);
     });
   },
 };
