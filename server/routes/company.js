@@ -6,13 +6,11 @@ var company = function(app){
   app.post('/company/create', function(req, res){
     var thisCompany = companyAPI.createCompanyObj(req);
 
-    var newCompany = companyAPI.createCompany(thisCompany, function(err){
+    var newCompany = companyAPI.createCompany(thisCompany, function(err, companyObj){
       if (err) throw err;
-      res.end(JSON.stringify(newCompany));
-    });
 
-    res.writeHead(200, {
-      'Content-Type': 'application/json'
+      res.json(companyObj);
+      res.end(JSON.stringify(newCompany));
     });
   });
 

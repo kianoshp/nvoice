@@ -34,8 +34,8 @@ describe('Company Api tests', function(){
         superagent.post(URL + '/company/create')
           .send(companyObj)
           .end(function(err, res){
-            companyObj = res.body.company;
-            currentCompanyId = res.body.company._id;
+            companyObj = res.body;
+            currentCompanyId = res.body._id;
             chai.expect(companyObj).to.exist;
             chai.expect(companyObj).to.not.be.undefined;
             chai.expect(companyObj.companyName).to.equal(companyObj.companyName);

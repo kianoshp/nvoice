@@ -32,11 +32,8 @@ var companyAPI = {
     companyObj.save(function(err){
       if (err) throw err;
 
-      cb(null);
+      cb(null, companyObj);
     });
-
-    companyAPI.company = companyObj;
-    return companyAPI;
   },
 
   readCompany: function(companyId, cb){
@@ -48,6 +45,4 @@ var companyAPI = {
   },
 };
 
-
-module.exports.CompanySchema = Company;
 module.exports = companyAPI;
