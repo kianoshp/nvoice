@@ -24,7 +24,7 @@ var company = function(app){
   });
 
   app.put('/company/update', function(req, res){
-    companyAPI.updateCompany(req.body.companyId, req.body.companyObj, {}, function(err, company) {
+    companyAPI.updateCompany(req.body.companyId, req.body.companyObj, {new: true}, function(err, company) {
       if(err) throw err;
 
       res.json(company);
