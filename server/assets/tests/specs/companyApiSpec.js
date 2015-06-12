@@ -26,6 +26,24 @@ describe('Company Api tests', function(){
     created: Date.now()
   };
   var currentCompanyId;
+  var modifiedCompany = {
+    companyName: 'Bobs Construction Co.',
+    isParent: true,
+    address: {
+      address1: "55 Bob Avenue",
+      address2: "Suite 707",
+      city: "Bobopolis",
+      state: "Florida",
+      country: "United States",
+      zip: "09218"
+    },
+    clients: [],
+    phone: "5184441234",
+    fax: '',
+    cell: '',
+    email: "questions@bobinc.com",
+    created: Date.now()
+  };
 
   describe('CRUD actions', function(){
 
@@ -56,6 +74,42 @@ describe('Company Api tests', function(){
             chai.expect(thisCompany.companyName).to.equal(companyObj.companyName);
             done();
           });
+      });
+    });
+
+    describe('Update', function(){
+      it('should update a company', function(done){
+        superagent.put(URL + '/company/update')
+          .send({
+            companyObj: modifiedCompany,
+            companyId: currentCompanyId
+          })
+          .end(function(err, res){
+            if(err) console.log(err);
+            var thisCompany = res.body;
+
+            chai.expect(thisCompany).to.exist;
+            chai.expect(thisCompany).to.not.be.undefined;
+            chai.expect(thisCompany.companyName).to.equal(modifiedCompany.companyName);
+            done();
+          });
+      });
+    });
+
+    describe('Delete', function(){
+      it('should delete a company', function(done){
+        superagent.del(URL + '/company/delete')
+          .send({
+            companyId: currentCompanyId
+          })
+          .end(function(err, res){
+            if(err) console.log(err)
+            chai.expect(res.statusCode).to.equal(200);
+            chai.expect(res.body).to.exist;
+            chai.expect(res.body.status).to.equal('complete');
+            chai.expect(res.body.isRemoved).to.be.true;
+            done();
+          })
       });
     });
   });

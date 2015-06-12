@@ -22,6 +22,21 @@ var company = function(app){
       res.json(company);
     });
   });
+
+  app.put('/company/update', function(req, res){
+    companyAPI.updateCompany(req.body.companyId, req.body.companyObj, {}, function(err, company) {
+      if(err) throw err;
+
+      res.json(company);
+    });
+  });
+
+  app.delete('/company/delete', function(req, res) {
+    console.log("deleting company");
+    companyAPI.deleteCompany(req.body.companyId);
+      res.setHeader('Content-Type', 'application/json');
+      res.send({status: 'complete', isRemoved: true});
+  });
 };
 
 module.exports = company;
