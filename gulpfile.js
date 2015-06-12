@@ -24,7 +24,10 @@ gulp.task("lint", function(){
 gulp.task('test', function(){
   return gulp.src(['./server/assets/tests/specs/*.js'], {read: false})
     .pipe(mocha({reporter: 'nyan'}))
-    .on('error', gutil.log);
+    .on('error', gutil.log)
+    .once('end', function () {
+      process.exit();
+    });
 });
 
 // run 'gulp watch' to watch all .js files and have livereload listen for changes
