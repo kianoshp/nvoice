@@ -44,8 +44,8 @@ var CompanySchema = new db.Schema({
   fax: String,
   cell: String,
   email: {
-        type: String,
-        required: true
+    type: String,
+    required: true
   },
   created: {
     type: Date,

@@ -5,7 +5,7 @@ var _ = require('lodash');
 var companyAPI = {
   company: {},
 
-  createCompanyObj: function(req, cb){
+  createCompanyObj: function(req, cb) {
     var companyObject = new Company({
       companyName: req.body.companyName,
       isParent: req.body.isParent,
@@ -28,15 +28,15 @@ var companyAPI = {
     return companyObject;
   },
 
-  createCompany: function(companyObj, cb){
-    companyObj.save(function(err){
+  createCompany: function(companyObj, cb) {
+    companyObj.save(function(err) {
 
       cb(err, companyObj);
     });
   },
 
-  readCompany: function(companyId, cb){
-    Company.findById(companyId, function(err, doc){
+  readCompany: function(companyId, cb) {
+    Company.findById(companyId, function(err, doc) {
 
       cb(err, doc);
     });
