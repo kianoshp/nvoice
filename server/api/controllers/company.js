@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('mongoose');
 var Company = require('../models/company');
 var _ = require('lodash');
