@@ -12,7 +12,7 @@ var noop = function () {};
 // run 'gulp lint' in the console to run jshint and jscs on every .js file under the server folder
 // and all its sub folders
 gulp.task("lint", function(){
-  gulp.src("./server/routes/**/*.js")
+  gulp.src("./server/**/*.js")
     .pipe(jshint())
     .pipe(jscs())
     .on('error', noop)
