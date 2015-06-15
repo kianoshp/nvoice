@@ -23,6 +23,14 @@ var user = function(app) {
       res.json(user);
     });
   });
+
+  app.put('/user/update', function(req, res) {
+    userAPI.updateUser(req.body.userId, req.body.userObj, {new: true}, function(err, user) {
+      if (err) throw err;
+
+      res.json(user);
+    });
+  });
 };
 
 module.exports = user;
