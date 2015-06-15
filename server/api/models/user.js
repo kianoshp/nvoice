@@ -27,7 +27,7 @@ var UserSchema = new db.Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'client', 'invoice Creator']
+    enum: ['admin', 'client', 'invoiceCreator']
   }
 });
 
