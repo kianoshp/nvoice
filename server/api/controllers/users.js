@@ -31,6 +31,13 @@ var userAPI = {
       cb(err, doc);
     });
   },
+
+  updateUser: function(userId, userObj, options, cb) {
+    User.findByIdAndUpdate(userId, userObj, options, function(err, doc) {
+
+      cb(err, doc);
+    });
+  },
 };
 
 module.exports = userAPI;

@@ -14,6 +14,13 @@ describe('User Api tests', function() {
     role: 'admin'
   };
   var currentUserId;
+  var modifiedUser = {
+    firstName: 'Bob',
+    lastName: 'Bobberson',
+    password: 'bobbypass',
+    email: 'bigbob@bobconstructionco.com',
+    role: 'admin'
+  }
 
   describe('CRUD actions', function() {
 
@@ -28,7 +35,7 @@ describe('User Api tests', function() {
             chai.expect(userObj).to.not.be.undefined;
             chai.expect(userObj.firstName).to.equal(userObj.firstName);
             done();
-        });
+          });
       });
     });
 
@@ -43,7 +50,25 @@ describe('User Api tests', function() {
             chai.expect(thisUser).to.not.be.undefined;
             chai.expect(thisUser.firstName).to.equal(userObj.firstName);
             done();
-        });
+          });
+      });
+    });
+
+    describe('Update', function() {
+      it('should update a company', function(done) {
+        superagent.put(URL + '/user/update')
+          .send({
+            userObj: modifiedUser,
+            userId: currentUserId
+          })
+          .end(function(err, res) {
+            if (err) console.log(err);
+            var thisUser = res.body
+            chai.expect(thisUser).to.exist;
+            chai.expect(thisUser).to.not.be.undefined;
+            chai.expect(thisUser.email).to.equal(modifiedUser.email);
+            done();
+          });
       });
     });
   });
