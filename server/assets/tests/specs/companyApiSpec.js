@@ -1,11 +1,15 @@
 'use strict';
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 var chai = require('chai');
 var superagent = require('superagent');
+var fs = require('fs');
+var cert = fs.readFileSync(__dirname + '/../../../../cert.pem');
 
-describe('Company Api tests', function() {
+describe('Company API tests', function() {
 
-  var URL = 'http://localhost:2015';
+  var URL = 'https://localhost:4443';
   var companyObj = {
     companyName: 'Bobs Buildings Inc.',
     isParent: true,

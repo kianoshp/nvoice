@@ -7,11 +7,10 @@ var company = function(app) {
   app.post('/company/create', function(req, res) {
     var thisCompany = companyAPI.createCompanyObj(req);
 
-    var newCompany = companyAPI.createCompany(thisCompany, function(err, companyObj) {
+    companyAPI.createCompany(thisCompany, function(err, companyObj) {
       if (err) throw err;
 
       res.json(companyObj);
-      res.end(JSON.stringify(newCompany));
     });
   });
 
@@ -20,6 +19,7 @@ var company = function(app) {
 
     companyAPI.readCompany(companyId, function(err, company) {
       if (err) throw err;
+      
       res.json(company);
     });
   });
