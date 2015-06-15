@@ -93,11 +93,9 @@ var expressConfig = function(app, express) {
     app.use(logger('common', {
       stream: fs.createWriteStream(logPath, {flags: 'a'})
     }));
-    console.log('access.log exists!');
   } else {
     fs.mkdirSync(path.dirname(logPath));
     fs.writeFileSync(logPath, {flags: 'wx'});
-    console.log('access.log created!');
   }
 
   // Setup log level for server console output
