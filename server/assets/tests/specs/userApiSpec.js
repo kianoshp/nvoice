@@ -71,5 +71,22 @@ describe('User Api tests', function() {
           });
       });
     });
+
+    describe('Delete', function() {
+      it('should delete a user', function(done) {
+        superagent.del(URL + '/user/delete')
+          .send({
+            userId: currentUserId
+          })
+          .end(function(err, res) {
+            if (err) console.log(err)
+            chai.expect(res.statusCode).to.equal(200);
+            chai.expect(res.body).to.exist;
+            chai.expect(res.body.status).to.equal('complete');
+            chai.expect(res.body.isRemoved).to.be.true;
+            done();
+          });
+      });
+    });
   });
 });

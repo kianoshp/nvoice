@@ -31,6 +31,12 @@ var user = function(app) {
       res.json(user);
     });
   });
+
+  app.delete('/user/delete', function(req, res) {
+    userAPI.deleteUser(req.body.userId);
+    res.setHeader('Content-Type', 'application/json');
+    res.send({status: 'complete', isRemoved: true});
+  });
 };
 
 module.exports = user;
