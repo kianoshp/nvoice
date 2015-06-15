@@ -32,3 +32,7 @@ gulp.task('watch', function(){
   livereload.listen();
   gulp.watch('./server/**/*.js');
 });
+
+gulp.task('hello', function() {
+  console.log('heelo world!');
+});
