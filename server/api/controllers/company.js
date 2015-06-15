@@ -42,19 +42,19 @@ var companyAPI = {
     });
   },
 
-  updateCompany: function(companyId, companyObj, options, cb){
-    Company.findByIdAndUpdate(companyId, companyObj, options, function(err, doc){
+  updateCompany: function(companyId, companyObj, options, cb) {
+    Company.findByIdAndUpdate(companyId, companyObj, options, function(err, doc) {
 
       cb(err, doc);
     });
   },
 
-  deleteCompany: function(companyId){
-    Company.remove({_id: companyId}, function(err){
-      if(err) return false;
+  deleteCompany: function(companyId) {
+    Company.remove({_id: companyId}, function(err) {
+      if (err) return false;
 
       return true;
-    })
+    });
   }
 };
 
