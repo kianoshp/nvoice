@@ -2,6 +2,7 @@
   "preset": "node-style-guide",
   "disallowMultipleVarDecl": true,
   "requireTrailingComma": null,
+  "requireCapitalizedComments": null,
   "requireSpaceAfterKeywords": [
     "if",
     "else",

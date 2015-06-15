@@ -4,7 +4,7 @@
  */
 
 var compress = require('compression');
-var favicon = require('serve-favicon');
+// TODO var favicon = require('serve-favicon');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -13,7 +13,7 @@ var errorHandler = require('errorhandler');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var passport = require('passport');
-var passportConfig = require('./passport-config');
+// TODO var passportConfig = require('./passport-config');
 var fs = require('fs');
 
 // Configuration files
@@ -85,7 +85,7 @@ var expressConfig = function(app, express) {
   // Setup passport for authentication
   app.use(passport.initialize());
   app.use(passport.session());
-  passportConfig(passport);
+  // TODO passportConfig();
 
   // If access.log exists, then use it to store logs, otherwise
   // create it
