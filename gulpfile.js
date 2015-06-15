@@ -23,7 +23,7 @@ gulp.task('lint', function(){
 // run 'gulp test' to run test suite
 gulp.task('test', function(){
   return gulp.src(['./server/assets/tests/specs/*.js'], {read: false})
-    .pipe(mocha({reporter: 'nyan'}))
+    .pipe(mocha({reporter: 'spec'}))
     .on('error', gutil.log)
     .once('end', function () {
       process.exit();
@@ -32,6 +32,7 @@ gulp.task('test', function(){
 
 // run 'gulp watch' to watch all .js files and have livereload listen for changes
 gulp.task('watch', function(){
+  exitTest = false;
   livereload.listen();
-  gulp.watch('./server/**/*.js', ['lint', 'test']);
+  gulp.watch('./server/**/*.js', ['lint']);
 });

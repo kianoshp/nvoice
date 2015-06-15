@@ -4,8 +4,6 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 var chai = require('chai');
 var superagent = require('superagent');
-var fs = require('fs');
-var cert = fs.readFileSync(__dirname + '/../../../../cert.pem');
 
 describe('Company API tests', function() {
 
@@ -47,7 +45,7 @@ describe('Company API tests', function() {
     email: 'questions@bobinc.com',
     created: Date.now()
   };
-
+  /*jshint -W030 */
   describe('CRUD actions', function() {
 
     describe('Create', function() {
@@ -59,9 +57,10 @@ describe('Company API tests', function() {
             currentCompanyId = res.body._id;
             chai.expect(companyObj).to.exist;
             chai.expect(companyObj).to.not.be.undefined;
-            chai.expect(companyObj.companyName).to.equal(companyObj.companyName);
+            chai.expect(companyObj.companyName).to
+              .equal(companyObj.companyName);
             done();
-        });
+          });
       });
     });
 
@@ -70,11 +69,14 @@ describe('Company API tests', function() {
         superagent.get(URL + '/company/read')
           .query({companyId: currentCompanyId})
           .end(function(err, res) {
-            if (err) console.log(err);
+            if (err) {
+              console.log(err);
+            }
             var thisCompany = res.body;
             chai.expect(thisCompany).to.exist;
             chai.expect(thisCompany).to.not.be.undefined;
-            chai.expect(thisCompany.companyName).to.equal(companyObj.companyName);
+            chai.expect(thisCompany.companyName).to
+              .equal(companyObj.companyName);
             done();
           });
       });
@@ -88,12 +90,15 @@ describe('Company API tests', function() {
             companyId: currentCompanyId
           })
           .end(function(err, res) {
-            if (err) console.log(err);
+            if (err) {
+              console.log(err);
+            }
             var thisCompany = res.body;
 
             chai.expect(thisCompany).to.exist;
             chai.expect(thisCompany).to.not.be.undefined;
-            chai.expect(thisCompany.companyName).to.equal(modifiedCompany.companyName);
+            chai.expect(thisCompany.companyName).to
+              .equal(modifiedCompany.companyName);
             done();
           });
       });
@@ -106,7 +111,9 @@ describe('Company API tests', function() {
             companyId: currentCompanyId
           })
           .end(function(err, res) {
-            if (err) console.log(err)
+            if (err) {
+              console.log(err);
+            }
             chai.expect(res.statusCode).to.equal(200);
             chai.expect(res.body).to.exist;
             chai.expect(res.body.status).to.equal('complete');
@@ -115,5 +122,6 @@ describe('Company API tests', function() {
           });
       });
     });
+    /*jshint -W030 */
   });
 });
