@@ -31,28 +31,33 @@ if (app.get('env') === 'development') {
 // Express configuration
 require('./server/config/express')(app, express);
 
-// Start Express server.
-https.createServer(credentials, app)
-  .listen(app.get('securePort'), function() {
-    console.log('✔ Express server listening on port '.green + '%d'.blue + ' in '.green + '%s'.blue + ' mode'.green, app.get('securePort'), app.get('env'));
+http.createServer(app)
+  .listen(app.get('port'), function() {
+    console.log('✔ Express server listening on port '.green + '%d'.blue + ' in '.green + '%s'.blue + ' mode'.green, app.get('port'), app.get('env'));
 });
+
+// Start Express server.
+// https.createServer(credentials, app)
+//   .listen(app.get('securePort'), function() {
+//     console.log('✔ Express server listening on port '.green + '%d'.blue + ' in '.green + '%s'.blue + ' mode'.green, app.get('securePort'), app.get('env'));
+// });
 
 // Set up HTTP redirect
-var httpApp = express();
-var httpRouter = express.Router();
+// var httpApp = express();
+// var httpRouter = express.Router();
 
-httpApp.use('*', httpRouter);
+// httpApp.use('*', httpRouter);
 
-httpRouter.get('*', function(req, res) {
-  var host = req.get('Host');
+// httpRouter.get('*', function(req, res) {
+//   var host = req.get('Host');
 
-  host = host.replace(/:\d+$/, ':' + app.get('securePort'));
+//   host = host.replace(/:\d+$/, ':' + app.get('securePort'));
 
-  var destination = ['https://', host, req.url].join('');
-  return res.redirect(destination);
-});
+//   var destination = ['https://', host, req.url].join('');
+//   return res.redirect(destination);
+// });
 
-var httpServer = http.createServer(httpApp);
-httpServer.listen(app.get('port'));
+// var httpServer = http.createServer(httpApp);
+// httpServer.listen(app.get('port'));
 
 module.exports = app;
