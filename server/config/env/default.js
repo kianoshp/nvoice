@@ -13,7 +13,7 @@ var defaults = {
   server: {
     // Port to run server on
     port: process.env.PORT || 2015,
-    // https port
+    // Https port
     securePort: process.env.SECUREPORT || 4443,
     // Host/URL to run server on
     host: process.env.HOSTNAME || '127.0.0.1',
@@ -24,7 +24,7 @@ var defaults = {
     loginIgnorePaths: []
   },
   root: path.normalize(__dirname + '/../../..'),
-  staticAssets: 'assets'  
+  staticAssets: 'assets'
 };
 
 // Export the config object based on the NODE_ENV

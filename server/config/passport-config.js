@@ -6,7 +6,7 @@ var R = require('ramda');
 
 /*
   Passport session setup.
-  To support persistent login sessions, Passport needs to be able to   
+  To support persistent login sessions, Passport needs to be able to
   serialize users into and deserialize users out of the session.  Typically,
   this will be as simple as storing the user ID when serializing, and finding
   the user by ID when deserializing.
@@ -30,7 +30,7 @@ var visa = function(passport) {
     {username: 'kianosh.pourian@perkinelmer.com', password: 'password'},
     {username: 'muslim.baig@perkinelmer.com', password: 'password'},
     {username: 'richard.oleary@perkinelmer.com', password: 'password'},
-  ]
+  ];
 
   validateUser = function(username, password, done) {
 
@@ -49,13 +49,13 @@ var visa = function(passport) {
     // var reqURL;
     // var requestOptions = {};
     // var checkForPassword = true;
-      
+
     // options = {
     //   protocol: 'http',
     //   host: '?',
     //   pathname: '?'
     // };
-    
+
     // reqURL = url.format(options);
     // requestOptions = {
     //   headers: {

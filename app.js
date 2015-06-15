@@ -13,7 +13,7 @@ var db = require('./server/api/models/db.js');
 // Add coloring for console output
 require('colors');
 
-// self signed cert credentials
+// Self signed cert credentials
 var credentials = {
   key: fs.readFileSync('key.pem'),
   cert: fs.readFileSync('cert.pem'),
@@ -23,9 +23,9 @@ var credentials = {
 // Create Express server.
 var app = express();
 
-// ignoring the self signed certs in dev environment
-if(app.get('env') === 'development') {
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// Ignoring the self signed certs in dev environment
+if (app.get('env') === 'development') {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 }
 
 // Express configuration
@@ -43,10 +43,10 @@ var httpRouter = express.Router();
 
 httpApp.use('*', httpRouter);
 
-httpRouter.get('*', function(req, res){
+httpRouter.get('*', function(req, res) {
   var host = req.get('Host');
 
-  host = host.replace(/:\d+$/, ":" + app.get('securePort'));
+  host = host.replace(/:\d+$/, ':' + app.get('securePort'));
 
   var destination = ['https://', host, req.url].join('');
   return res.redirect(destination);
