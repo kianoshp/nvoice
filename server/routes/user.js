@@ -14,6 +14,15 @@ var user = function(app) {
       res.end(JSON.stringify(newUser));
     });
   });
+
+  app.get('/user/read', function(req, res) {
+    var userId = req.query.userId || req.body.userId;
+
+    userAPI.readUser(userId, function(err, user) {
+      if (err) throw err;
+      res.json(user);
+    });
+  });
 };
 
 module.exports = user;

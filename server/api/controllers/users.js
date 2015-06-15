@@ -19,9 +19,18 @@ var userAPI = {
   },
 
   createUser: function(userObject, cb) {
-    userObject.save(function(err) {
+    userObject.save(function(err, doc) {
+
+      cb(err, doc);
+    });
+  },
+
+  readUser: function(userId, cb) {
+    User.findById(userId, function(err, doc) {
 
       cb(err, doc);
     });
   },
 };
+
+module.exports = userAPI;
