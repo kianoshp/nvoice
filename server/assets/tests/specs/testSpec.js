@@ -1,3 +1,5 @@
+'use strict';
+
 var expect = require('chai').expect;
 
 // Making sure testing with gulp works

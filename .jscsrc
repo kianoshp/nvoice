@@ -13,5 +13,6 @@
     "return",
     "try",
     "typeof"
-  ] 
+  ],
+  "excludeFiles": ["node_modules/**", "bower_modules/**", "server/swagger-ui/**"]   
 }

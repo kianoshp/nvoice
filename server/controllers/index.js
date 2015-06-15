@@ -1,8 +1,8 @@
+'use strict';
+
 /**
  * Index Controller
  */
-
-'use strict';
 
 var settings = require('../config/env/default');
 var path = require('path');

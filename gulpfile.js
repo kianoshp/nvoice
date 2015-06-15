@@ -11,13 +11,13 @@ var noop = function () {};
 
 // run 'gulp lint' in the console to run jshint and jscs on every .js file under the server folder
 // and all its sub folders
-gulp.task("lint", function(){
-  gulp.src("./server/**/*.js")
+gulp.task('lint', function(){
+  gulp.src(['./server/**/*.js', '!./server/swagger-ui/**'])
     .pipe(jshint())
     .pipe(jscs())
     .on('error', noop)
     .pipe(stylish.combineWithHintResults())
-    .pipe(jshint.reporter("jshint-stylish"));
+    .pipe(jshint.reporter('jshint-stylish'));
 });
 
 // run 'gulp test' to run test suite
@@ -33,5 +33,5 @@ gulp.task('test', function(){
 // run 'gulp watch' to watch all .js files and have livereload listen for changes
 gulp.task('watch', function(){
   livereload.listen();
-  gulp.watch('./server/**/*.js');
+  gulp.watch('./server/**/*.js', ['lint', 'test']);
 });
