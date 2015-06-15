@@ -20,7 +20,7 @@ describe('User Api tests', function() {
     password: 'bobbypass',
     email: 'bigbob@bobconstructionco.com',
     role: 'admin'
-  }
+  };
 
   describe('CRUD actions', function() {
 

@@ -15,7 +15,7 @@ var userAPI = {
       role: req.body.role
     });
 
-    return userObject
+    return userObject;
   },
 
   createUser: function(userObject, cb) {
