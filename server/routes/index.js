@@ -21,7 +21,6 @@ var routes = function(app) {
 
   // Home
   app.get('/', indexController.index); // TODO consider using Router
-
 };
 
 module.exports = routes;
