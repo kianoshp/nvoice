@@ -35,3 +35,7 @@ gulp.task('watch', function(){
   livereload.listen();
   gulp.watch('./server/**/*.js', ['lint', 'test']);
 });
+
+gulp.task('hello', function() {
+  console.log('heelo world!');
+});
