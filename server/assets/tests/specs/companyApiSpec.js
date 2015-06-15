@@ -5,7 +5,7 @@ var superagent = require('superagent');
 
 describe('Company Api tests', function() {
 
-  var URL = 'https://localhost:4443';
+  var URL = 'http://localhost:2015';
   var companyObj = {
     companyName: 'Bobs Buildings Inc.',
     isParent: true,
