@@ -89,7 +89,7 @@ var expressConfig = function(app, express) {
 
   // If access.log exists, then use it to store logs, otherwise
   // create it
-  if(fs.existsSync(logPath)){
+  if (fs.existsSync(logPath)) {
     app.use(logger('common', {
       stream: fs.createWriteStream(logPath, {flags: 'a'})
     }));
