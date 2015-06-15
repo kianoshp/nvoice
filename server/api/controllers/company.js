@@ -1,13 +1,11 @@
 'use strict';
 
-var mongoose = require('mongoose');
 var Company = require('../models/company');
-var _ = require('lodash');
 
 var companyAPI = {
   company: {},
 
-  createCompanyObj: function(req, cb) {
+  createCompanyObj: function(req) {
     var companyObject = new Company({
       companyName: req.body.companyName,
       isParent: req.body.isParent,
@@ -44,19 +42,19 @@ var companyAPI = {
     });
   },
 
-  updateCompany: function(companyId, companyObj, options, cb){
-    Company.findByIdAndUpdate(companyId, companyObj, options, function(err, doc){
+  updateCompany: function(companyId, companyObj, options, cb) {
+    Company.findByIdAndUpdate(companyId, companyObj, options, function(err, doc) {
 
       cb(err, doc);
     });
   },
 
-  deleteCompany: function(companyId){
-    Company.remove({_id: companyId}, function(err){
-      if(err) return false;
+  deleteCompany: function(companyId) {
+    Company.remove({_id: companyId}, function(err) {
+      if (err) return false;
 
       return true;
-    })
+    });
   }
 };
 
