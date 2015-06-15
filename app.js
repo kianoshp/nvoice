@@ -48,7 +48,7 @@ httpRouter.get('*', function(req, res) {
 
   host = host.replace(/:\d+$/, ':' + app.get('securePort'));
 
-  var destination = ['https://', host, req.url].join('');
+  var destination = ['https://', host, req.baseUrl, req.url].join('');
   return res.redirect(destination);
 });
 
