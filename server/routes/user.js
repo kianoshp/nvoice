@@ -29,13 +29,14 @@ var user = function(app) {
   });
 
   app.put('/user/update', function(req, res) {
-    userAPI.updateUser(req.body.userId, req.body.userObj, {new: true}, function(err, user) {
-      if (err) {
-        throw err;
-      }
+    userAPI.updateUser(req.body.userId, req.body.userObj,
+     {new: true}, function(err, user) {
+        if (err) {
+          throw err;
+        }
 
-      res.json(user);
-    });
+        res.json(user);
+      });
   });
 
   app.delete('/user/delete', function(req, res) {

@@ -33,7 +33,9 @@ var UserSchema = new db.Schema({
 
 UserSchema.pre('save', function(next) {
   var user = this;
-  if (!user.isModified('password')) return next();
+  if (!user.isModified('password')) {
+    return next();
+  }
 
   var salt = bcrypt.genSaltSync(10, 20);
 
