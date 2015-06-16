@@ -26,6 +26,23 @@ var invoiceItem = function(app) {
       res.json(item);
     });
   });
+
+  app.put('/invoiceItem/update', function(req, res) {
+    invoiceItemAPI.updateItem(req.body.itemId,
+      req.body.itemObj, {new: true}, function(err, item) {
+      if (err) {
+        throw err;
+      }
+
+      res.json(item);
+    });
+  });
+
+  app.delete('/invoiceItem/delete', function(req, res) {
+    invoiceItemAPI.deleteItem(req.body.itemId);
+    res.setHeader('Content-Type', 'application/json');
+    res.send({status: 'complete', isRemoved: true});
+  });
 };
 
 module.exports = invoiceItem;

@@ -15,12 +15,17 @@ describe('Invoice item tests', function() {
     isFlatFee: true
   };
   var currentItemId;
-
+  var modifiedItem = {
+    description: 'item on invoice',
+    qty: 100,
+    rate: 10,
+    isFlatFee: true
+  };
   /*jshint -W030 */
   describe('CRUD actions', function() {
 
     describe('Create', function() {
-      it('should create a invoiceItem', function(done) {
+      it('should create an invoiceItem', function(done) {
         superagent.post(URL + '/invoiceItem/create')
           .send(invoiceItemObj)
           .end(function(err, res) {
@@ -36,7 +41,7 @@ describe('Invoice item tests', function() {
     });
 
     describe('Read', function() {
-      it('should read a invoiceItem', function(done) {
+      it('should read an invoiceItem', function(done) {
         superagent.get(URL + '/invoiceItem/read')
           .query({itemId: currentItemId})
           .end(function(err, res) {
@@ -52,5 +57,46 @@ describe('Invoice item tests', function() {
           });
       });
     });
+
+    describe('Update', function() {
+      it('should update an invoiceItem', function(done) {
+        superagent.put(URL + '/invoiceItem/update')
+          .send({
+            itemObj: modifiedItem,
+            itemId: currentItemId
+          })
+          .end(function(err, res) {
+            if (err) {
+              console.log(err);
+            }
+            var thisItem = res.body;
+            chai.expect(thisItem).to.exist;
+            chai.expect(thisItem).to.not.be.undefined;
+            chai.expect(thisItem.qty).to
+              .equal(modifiedItem.qty);
+            done();
+          });
+      });
+    });
+
+    describe('Delete', function() {
+      it('should delete an invoiceItem', function(done) {
+        superagent.del(URL + '/invoiceItem/delete')
+          .send({
+            itemId: currentItemId
+          })
+          .end(function(err, res) {
+            if (err) {
+              console.log(err);
+            }
+            chai.expect(res.statusCode).to.equal(200);
+            chai.expect(res.body).to.exist;
+            chai.expect(res.body.status).to.equal('complete');
+            chai.expect(res.body.isRemoved).to.be.true;
+            done();
+          });
+      });
+    });
+    /*jshint -W030 */
   });
 });
