@@ -29,7 +29,7 @@ describe('Invoice API tests', function() {
     status: 'entered',
     invoiceItems: []
   };
-
+  /*jshint -W030 */
   describe('CRUD actions', function() {
 
     describe('Create', function() {
@@ -105,5 +105,6 @@ describe('Invoice API tests', function() {
           });
       });
     });
+    /*jshint -W030 */
   });
 });

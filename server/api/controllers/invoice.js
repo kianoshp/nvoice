@@ -38,10 +38,11 @@ var invoiceAPI = {
   },
 
   upddateInvoice: function(invoiceId, invoiceObj, options, cb) {
-    Invoice.findByIdAndUpdate(invoiceId, invoiceObj, options, function(err, doc) {
+    Invoice.findByIdAndUpdate(invoiceId, invoiceObj,
+      options, function(err, doc) {
 
-      cb(err, doc);
-    });
+        cb(err, doc);
+      });
   },
 
   deleteInvoice: function(invoiceId) {

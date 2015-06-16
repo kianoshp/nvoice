@@ -29,13 +29,14 @@ var invoice = function(app) {
   });
 
   app.put('/invoice/update', function(req, res) {
-    invoiceAPI.upddateInvoice(req.body.invoiceId, req.body.invoiceObj, {new: true}, function(err, invoice) {
-      if (err) {
-        throw err;
-      }
+    invoiceAPI.upddateInvoice(req.body.invoiceId, req.body.invoiceObj,
+      {new: true}, function(err, invoice) {
+        if (err) {
+          throw err;
+        }
 
-      res.json(invoice);
-    });
+        res.json(invoice);
+      });
   });
 
   app.delete('/invoice/delete', function(req, res) {
