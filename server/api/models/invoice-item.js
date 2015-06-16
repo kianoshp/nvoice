@@ -7,8 +7,8 @@ var InvoiceItemSchema = new db.Schema({
   qty: Number,
   rate: Number,
   isFlatFee: {
-      type: Boolean,
-      default: false
+    type: Boolean,
+    default: false
   }
 });
 
