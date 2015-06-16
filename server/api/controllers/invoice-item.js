@@ -30,6 +30,24 @@ var invoiceItemAPI = {
       cb(err, doc);
     });
   },
+
+  updateItem: function(itemId, itemObj, options, cb) {
+    InvoiceItem.findByIdAndUpdate(itemId, itemObj,
+      options, function(err, doc) {
+
+        cb(err, doc);
+      });
+  },
+
+  deleteItem: function(itemId) {
+    InvoiceItem.remove({_id: itemId}, function(err) {
+      if (err) {
+        return false;
+      }
+
+      return true;
+    });
+  }
 };
 
 module.exports = invoiceItemAPI;
