@@ -41,7 +41,9 @@ var userAPI = {
 
   deleteUser: function(userId) {
     User.remove({_id: userId}, function(err) {
-      if (err) return false;
+      if (err) {
+        return false;
+      }
 
       return true;
     });

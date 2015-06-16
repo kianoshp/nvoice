@@ -22,7 +22,7 @@ describe('User Api tests', function() {
     email: 'bigbob@bobconstructionco.com',
     role: 'admin'
   };
-
+  /*jshint -W030 */
   describe('CRUD actions', function() {
 
     describe('Create', function() {
@@ -45,7 +45,9 @@ describe('User Api tests', function() {
         superagent.get(URL + '/user/read')
           .query({userId: currentUserId})
           .end(function(err, res) {
-            if (err) console.log(err);
+            if (err) {
+              console.log(err);
+            }
             var thisUser = res.body;
             chai.expect(thisUser).to.exist;
             chai.expect(thisUser).to.not.be.undefined;
@@ -63,8 +65,10 @@ describe('User Api tests', function() {
             userId: currentUserId
           })
           .end(function(err, res) {
-            if (err) console.log(err);
-            var thisUser = res.body
+            if (err) {
+              console.log(err);
+            }
+            var thisUser = res.body;
             chai.expect(thisUser).to.exist;
             chai.expect(thisUser).to.not.be.undefined;
             chai.expect(thisUser.email).to.equal(modifiedUser.email);
@@ -80,7 +84,9 @@ describe('User Api tests', function() {
             userId: currentUserId
           })
           .end(function(err, res) {
-            if (err) console.log(err)
+            if (err) {
+              console.log(err);
+            }
             chai.expect(res.statusCode).to.equal(200);
             chai.expect(res.body).to.exist;
             chai.expect(res.body.status).to.equal('complete');
@@ -89,5 +95,6 @@ describe('User Api tests', function() {
           });
       });
     });
+    /*jshint -W030 */
   });
 });
