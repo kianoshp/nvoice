@@ -94,7 +94,6 @@ describe('Company API tests', function() {
               console.log(err);
             }
             var thisCompany = res.body;
-
             chai.expect(thisCompany).to.exist;
             chai.expect(thisCompany).to.not.be.undefined;
             chai.expect(thisCompany.companyName).to
