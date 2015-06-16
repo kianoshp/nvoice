@@ -6,7 +6,7 @@ var superagent = require('superagent');
 
 describe('User Api tests', function() {
 
-  var URL = 'http://localhost:2015';
+  var URL = 'https://localhost:4443';
   var userObj = {
     firstName: 'Bob',
     lastName: 'Bobberson',
