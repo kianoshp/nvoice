@@ -7,7 +7,6 @@ var Invoice = require('./invoice');
 var InvoiceItemSchema = new db.Schema({
   invoiceId: {
     type: db.Schema.ObjectId,
-    ref: 'Invoice',
     required: true
   },
   description: String,
@@ -17,19 +16,6 @@ var InvoiceItemSchema = new db.Schema({
     type: Boolean,
     default: false
   }
-});
-
-InvoiceItemSchema.post('save', function() {
-  var item = this;
-  Invoice.findByIdAndUpdate(
-    item.invoiceId,
-    {$push: {'invoiceItems': [item]}},
-    {safe: true, upsert: true, new: true},
-    function(err) {
-      if (err) {
-        throw err;
-      }
-    });
 });
 
 module.exports = mongoose.model('invoiceItem', InvoiceItemSchema);

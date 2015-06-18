@@ -4,21 +4,26 @@ var invoiceItemAPI = require('./../api/controllers/invoice-item');
 
 var invoiceItem = function(app) {
   app.post('/invoiceItem/create', function(req, res) {
-    var thisItem = invoiceItemAPI.createItemObj(req);
+    var thisItem = invoiceItemAPI.createInvoiceItemObj(req);
+    var thisInvoiceId = req.body.invoiceId;
 
-    invoiceItemAPI.createItem(thisItem, function(err, itemObj) {
-      if (err) {
-        throw err;
-      }
+    invoiceItemAPI.createInvoiceItem(
+      thisInvoiceId,
+      {$push: {'invoiceItems': [thisItem]}},
+      {safe: true, upsert: true, new: true},
+      function(err, invoiceItem) {
+        if (err) {
+          throw err;
+        }
 
-      res.json(itemObj);
-    });
+        res.json(invoiceItem);
+      });
   });
 
   app.get('/invoiceItem/read', function(req, res) {
     var itemId = req.query.itemId || req.body.itemId;
 
-    invoiceItemAPI.readItem(itemId, function(err, item) {
+    invoiceItemAPI.readInvoiceItem(itemId, function(err, item) {
       if (err) {
         throw err;
       }
@@ -28,7 +33,7 @@ var invoiceItem = function(app) {
   });
 
   app.put('/invoiceItem/update', function(req, res) {
-    invoiceItemAPI.updateItem(req.body.itemId,
+    invoiceItemAPI.updateInvoiceItem(req.body.itemId,
       req.body.itemObj, {new: true}, function(err, item) {
       if (err) {
         throw err;
@@ -39,7 +44,7 @@ var invoiceItem = function(app) {
   });
 
   app.delete('/invoiceItem/delete', function(req, res) {
-    invoiceItemAPI.deleteItem(req.body.itemId);
+    invoiceItemAPI.deleteInvoiceItem(req.body.itemId);
     res.setHeader('Content-Type', 'application/json');
     res.send({status: 'complete', isRemoved: true});
   });

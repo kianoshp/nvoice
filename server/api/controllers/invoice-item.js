@@ -1,11 +1,12 @@
 'use strict';
 
 var InvoiceItem = require('../models/invoice-item');
+var Invoice = require('../models/invoice');
 
 var invoiceItemAPI = {
   invoiceItem: {},
 
-  createItemObj: function(req) {
+  createInvoiceItemObj: function(req) {
     var itemObject = new InvoiceItem({
       invoiceId: req.body.invoiceId,
       description: req.body.description,
@@ -17,21 +18,20 @@ var invoiceItemAPI = {
     return itemObject;
   },
 
-  createItem: function(itemObj, cb) {
-    itemObj.save(function(err) {
-
-      cb(err, itemObj);
+  createInvoiceItem: function(invoiceId, itemObj, options, cb) {
+    Invoice.findByIdAndUpdate(invoiceId, itemObj, options, function(err, doc) {
+      cb(err, doc);
     });
   },
 
-  readItem: function(itemId, cb) {
+  readInvoiceItem: function(itemId, cb) {
     InvoiceItem.findById(itemId, function(err, doc) {
 
       cb(err, doc);
     });
   },
 
-  updateItem: function(itemId, itemObj, options, cb) {
+  updateInvoiceItem: function(itemId, itemObj, options, cb) {
     InvoiceItem.findByIdAndUpdate(itemId, itemObj,
       options, function(err, doc) {
 
@@ -39,7 +39,7 @@ var invoiceItemAPI = {
       });
   },
 
-  deleteItem: function(itemId) {
+  deleteInvoiceItem: function(itemId) {
     InvoiceItem.remove({_id: itemId}, function(err) {
       if (err) {
         return false;
