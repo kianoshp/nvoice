@@ -32,7 +32,7 @@ var invoiceItemAPI = {
       var itemIdArray = data[0].invoiceItems;
       Invoice.find({
         itemId: {
-          $in: itemIdArray
+          $in: _.pluck(itemIdArray, '_id')
         }
       }, function(err, doc) {
         cb(err, doc);
