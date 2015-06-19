@@ -9,7 +9,7 @@ var invoiceItem = function(app) {
 
     invoiceItemAPI.createInvoiceItem(
       thisInvoiceId,
-      {$push: {'invoiceItems': [thisItem]}},
+      {$push: {'invoiceItems': thisItem}},
       {safe: true, upsert: true, new: true},
       function(err, invoiceItem) {
         if (err) {
@@ -21,14 +21,16 @@ var invoiceItem = function(app) {
   });
 
   app.get('/invoiceItem/read', function(req, res) {
+    var invoiceId = req.query.invoiceId || req.body.invoiceId;
     var itemId = req.query.itemId || req.body.itemId;
 
-    invoiceItemAPI.readInvoiceItem(itemId, function(err, item) {
+    invoiceItemAPI.readInvoiceItem(invoiceId, itemId, function(err, invoiceItem) {
       if (err) {
         throw err;
       }
+      console.log(invoiceItem);
+      res.json(invoiceItem);
 
-      res.json(item);
     });
   });
 

@@ -9,14 +9,16 @@ describe('Invoice item tests', function() {
 
   var URL = 'https://localhost:4443';
   var invoiceItemObj = {
-    invoiceId: "558039a859496aeaecffeda8",
+    invoiceId: "558317feee627fa68f5aab21",
     description: 'item on invoice',
     qty: 5,
     rate: 10,
     isFlatFee: true
   };
   var currentItemId;
+  var currentInvoiceId = "558317feee627fa68f5aab21";
   var modifiedItem = {
+    invoiceId: "558039a859496aeaecffeda8",
     description: 'item on invoice',
     qty: 100,
     rate: 10,
@@ -31,7 +33,7 @@ describe('Invoice item tests', function() {
           .send(invoiceItemObj)
           .end(function(err, res) {
             invoiceItemObj = res.body;
-            currentItemId = res.body._id;
+            currentItemId = res.body.invoiceItems[0]._id;
             chai.expect(invoiceItemObj).to.exist;
             chai.expect(invoiceItemObj).to.not.be.undefined;
             chai.expect(invoiceItemObj.description).to
@@ -44,12 +46,16 @@ describe('Invoice item tests', function() {
     describe('Read', function() {
       it('should read an invoiceItem', function(done) {
         superagent.get(URL + '/invoiceItem/read')
-          .query({itemId: currentItemId})
+          .query({
+            invoiceId: currentInvoiceId,
+            itemId: currentItemId
+          })
           .end(function(err, res) {
             if (err) {
               console.log(err);
             }
             var thisItem = res.body;
+            console.log(thisItem);
             chai.expect(thisItem).to.exist;
             chai.expect(thisItem).to.not.be.undefined;
             chai.expect(thisItem.description).to

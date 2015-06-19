@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var db = require('./db');
+var InvoiceItemSchema = require('./invoice-item');
 
 var InvoiceSchema = new db.Schema({
   title: {
@@ -36,7 +37,7 @@ var InvoiceSchema = new db.Schema({
       'partially paid', 'reversed', 'void'],
     required: true
   },
-  invoiceItems: []
+  invoiceItems: [InvoiceItemSchema]
 });
 
 module.exports = mongoose.model('invoice', InvoiceSchema);
