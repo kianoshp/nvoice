@@ -9,7 +9,7 @@ var invoiceItemAPI = {
   invoiceItem: {},
 
   createInvoiceItemObj: function(req) {
-    var itemObject = new InvoiceItem({
+    var invoiceItemObject = new InvoiceItem({
       invoiceId: req.body.invoiceId,
       description: req.body.description,
       qty: req.body.qty,
@@ -17,20 +17,20 @@ var invoiceItemAPI = {
       isFlatFee: req.body.isFlatFee
     });
 
-    return itemObject;
+    return invoiceItemObject;
   },
 
-  createInvoiceItem: function(invoiceId, itemObj, options, cb) {
-    Invoice.findByIdAndUpdate(invoiceId, itemObj, options, function(err, doc) {
+  createInvoiceItem: function(invoiceId, invoiceItemObj, options, cb) {
+    Invoice.findByIdAndUpdate(invoiceId, invoiceItemObj, options, function(err, doc) {
       cb(err, doc);
     });
   },
 
-  readInvoiceItem: function(invoiceId, itemId, cb) {
+  readInvoiceItem: function(invoiceId, invoiceItemId, cb) {
     Invoice.findById(
       invoiceId, function(err,doc) {
         var thisInvoiceItem = doc.invoiceItems.filter(function(invoiceItem) {
-          return invoiceItem._id.toString() === itemId;
+          return invoiceItem._id.toString() === invoiceItemId;
         }).pop();
 
         cb(err, thisInvoiceItem);
@@ -38,13 +38,13 @@ var invoiceItemAPI = {
     );
   },
 
-  updateInvoiceItem: function(invoiceId, itemId, itemObj, cb) {
+  updateInvoiceItem: function(invoiceId, invoiceItemId, invoiceItemObj, cb) {
 
   },
 
-  deleteInvoiceItem: function(invoiceId, itemId, cb) {
-    console.log(itemId);
-    Invoice.findByIdAndUpdate(invoiceId, itemId, function(err) {
+  deleteInvoiceItem: function(invoiceId, invoiceItemId, cb) {
+    console.log(invoiceItemId);
+    Invoice.findByIdAndUpdate(invoiceId, invoiceItemId, function(err) {
       cb(err);
     });
   }

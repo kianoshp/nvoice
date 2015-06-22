@@ -22,9 +22,9 @@ var invoiceItem = function(app) {
 
   app.get('/invoiceItem/read', function(req, res) {
     var invoiceId = req.query.invoiceId || req.body.invoiceId;
-    var itemId = req.query.itemId || req.body.itemId;
+    var invoiceItemId = req.query.invoiceItemId || req.body.invoiceItemId;
 
-    invoiceItemAPI.readInvoiceItem(invoiceId, itemId, function(err, invoiceItem) {
+    invoiceItemAPI.readInvoiceItem(invoiceId, invoiceItemId, function(err, invoiceItem) {
       if (err) {
         throw err;
       }
@@ -36,11 +36,11 @@ var invoiceItem = function(app) {
 
   app.put('/invoiceItem/update', function(req, res) {
     var invoiceId = req.query.invoiceId || req.body.invoiceId;
-    var itemId = req.query.itemId || req.body.itemId;
+    var invoiceItemId = req.query.invoiceItemId || req.body.invoiceItemId;
     var updatedItem = req.query.itemObj || req.body.itemObj;
 
     invoiceItemAPI.updateInvoiceItem(invoiceId,
-      itemId, updatedItem, function(err, invoiceItem) {
+      invoiceItemId, updatedItem, function(err, invoiceItem) {
       if (err) {
         throw err;
       }
@@ -52,7 +52,7 @@ var invoiceItem = function(app) {
   app.delete('/invoiceItem/delete', function(req, res) {
     console.log(req.body);
     invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId,
-     {$pull: {'invoiceItems': {_id: req.body.itemId}}},
+     {$pull: {'invoiceItems': {_id: req.body.invoiceItemId}}},
       function(err) {
       if (err) {
         throw err;

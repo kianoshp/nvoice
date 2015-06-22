@@ -33,7 +33,7 @@ describe('Invoice item tests', function() {
           .send(invoiceItemObj)
           .end(function(err, res) {
             invoiceItemObj = res.body;
-            currentItemId = res.body.invoiceItems._id;
+            currentItemId = res.body.invoiceItems[0]._id;
             chai.expect(invoiceItemObj).to.exist;
             chai.expect(invoiceItemObj).to.not.be.undefined;
             chai.expect(invoiceItemObj.description).to
@@ -48,7 +48,7 @@ describe('Invoice item tests', function() {
         superagent.get(URL + '/invoiceItem/read')
           .query({
             invoiceId: currentInvoiceId,
-            itemId: currentItemId
+            invoiceItemId: currentItemId
           })
           .end(function(err, res) {
             if (err) {
@@ -70,7 +70,7 @@ describe('Invoice item tests', function() {
           .send({
             invoiceId: currentInvoiceId,
             itemObj: modifiedItem,
-            itemId: currentItemId
+            invoiceItemId: currentItemId
           })
           .end(function(err, res) {
             if (err) {
@@ -92,7 +92,7 @@ describe('Invoice item tests', function() {
         superagent.del(URL + '/invoiceItem/delete')
           .send({
             invoiceId: currentInvoiceId,
-            itemId: currentItemId
+            invoiceItemId: currentItemId
           })
           .end(function(err, res) {
             if (err) {
