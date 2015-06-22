@@ -9,7 +9,7 @@ describe('Invoice item tests', function() {
 
   var URL = 'https://localhost:4443';
   var invoiceItemObj = {
-    invoiceId: "5585b661719fa48cdd857835",
+    invoiceId: "558317feee627fa68f5aab21",
     description: 'item on invoice',
     qty: 5,
     rate: 10,
@@ -33,7 +33,7 @@ describe('Invoice item tests', function() {
           .send(invoiceItemObj)
           .end(function(err, res) {
             invoiceItemObj = res.body;
-            currentItemId = res.body.invoiceItems[0]._id;
+            currentItemId = res.body.invoiceItems._id;
             chai.expect(invoiceItemObj).to.exist;
             chai.expect(invoiceItemObj).to.not.be.undefined;
             chai.expect(invoiceItemObj.description).to
@@ -55,11 +55,10 @@ describe('Invoice item tests', function() {
               console.log(err);
             }
             var thisItem = res.body;
-            console.log(thisItem);
             chai.expect(thisItem).to.exist;
             chai.expect(thisItem).to.not.be.undefined;
             chai.expect(thisItem.description).to
-              .equal(invoiceItemObj.description);
+              .equal('item on invoice');
             done();
           });
       });
@@ -69,6 +68,7 @@ describe('Invoice item tests', function() {
       it('should update an invoiceItem', function(done) {
         superagent.put(URL + '/invoiceItem/update')
           .send({
+            invoiceId: currentInvoiceId,
             itemObj: modifiedItem,
             itemId: currentItemId
           })
@@ -77,6 +77,7 @@ describe('Invoice item tests', function() {
               console.log(err);
             }
             var thisItem = res.body;
+            console.log(thisItem);
             chai.expect(thisItem).to.exist;
             chai.expect(thisItem).to.not.be.undefined;
             chai.expect(thisItem.qty).to
@@ -90,6 +91,7 @@ describe('Invoice item tests', function() {
       it('should delete an invoiceItem', function(done) {
         superagent.del(URL + '/invoiceItem/delete')
           .send({
+            invoiceId: currentInvoiceId,
             itemId: currentItemId
           })
           .end(function(err, res) {

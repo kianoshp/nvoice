@@ -28,27 +28,39 @@ var invoiceItem = function(app) {
       if (err) {
         throw err;
       }
-      // console.log(invoiceItem);
+
       res.json(invoiceItem);
 
     });
   });
 
   app.put('/invoiceItem/update', function(req, res) {
-    invoiceItemAPI.updateInvoiceItem(req.body.itemId,
-      req.body.itemObj, {new: true}, function(err, item) {
+    var invoiceId = req.query.invoiceId || req.body.invoiceId;
+    var itemId = req.query.itemId || req.body.itemId;
+    var updatedItem = req.query.itemObj || req.body.itemObj;
+
+    invoiceItemAPI.updateInvoiceItem(invoiceId,
+      itemId, updatedItem, function(err, invoiceItem) {
       if (err) {
         throw err;
       }
 
-      res.json(item);
+      res.json(invoiceItem);
     });
   });
 
   app.delete('/invoiceItem/delete', function(req, res) {
-    invoiceItemAPI.deleteInvoiceItem(req.body.itemId);
+    console.log(req.body);
+    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId,
+     {$pull: {'invoiceItems': {_id: req.body.itemId}}},
+      function(err) {
+      if (err) {
+        throw err;
+      }
+
     res.setHeader('Content-Type', 'application/json');
     res.send({status: 'complete', isRemoved: true});
+    });
   });
 };
 

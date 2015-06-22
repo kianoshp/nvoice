@@ -27,7 +27,7 @@ var invoiceItemAPI = {
   },
 
   readInvoiceItem: function(invoiceId, itemId, cb) {
-    Invoice.findById( 
+    Invoice.findById(
       invoiceId, function(err,doc) {
         var thisInvoiceItem = doc.invoiceItems.filter(function(invoiceItem) {
           return invoiceItem._id.toString() === itemId;
@@ -38,21 +38,14 @@ var invoiceItemAPI = {
     );
   },
 
-  updateInvoiceItem: function(itemId, itemObj, options, cb) {
-    InvoiceItem.findByIdAndUpdate(itemId, itemObj,
-      options, function(err, doc) {
+  updateInvoiceItem: function(invoiceId, itemId, itemObj, cb) {
 
-        cb(err, doc);
-      });
   },
 
-  deleteInvoiceItem: function(itemId) {
-    InvoiceItem.remove({_id: itemId}, function(err) {
-      if (err) {
-        return false;
-      }
-
-      return true;
+  deleteInvoiceItem: function(invoiceId, itemId, cb) {
+    console.log(itemId);
+    Invoice.findByIdAndUpdate(invoiceId, itemId, function(err) {
+      cb(err);
     });
   }
 };
