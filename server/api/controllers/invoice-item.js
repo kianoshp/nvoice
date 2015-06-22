@@ -3,6 +3,7 @@
 var InvoiceItem = require('../models/invoice-item');
 var Invoice = require('../models/invoice');
 var _ = require('lodash');
+var R = require('ramda');
 
 var invoiceItemAPI = {
   invoiceItem: {},
@@ -26,18 +27,15 @@ var invoiceItemAPI = {
   },
 
   readInvoiceItem: function(invoiceId, itemId, cb) {
-    Invoice.find({
-      _id: invoiceId
-    }, 'invoiceItems', function(err, data) {
-      var itemIdArray = data[0].invoiceItems;
-      Invoice.find({
-        itemId: {
-          $in: _.pluck(itemIdArray, '_id')
-        }
-      }, function(err, doc) {
-        cb(err, doc);
-      });
-    });
+    Invoice.findById( 
+      invoiceId, function(err,doc) {
+        var thisInvoiceItem = doc.invoiceItems.filter(function(invoiceItem) {
+          return invoiceItem._id.toString() === itemId;
+        }).pop();
+
+        cb(err, thisInvoiceItem);
+      }
+    );
   },
 
   updateInvoiceItem: function(itemId, itemObj, options, cb) {

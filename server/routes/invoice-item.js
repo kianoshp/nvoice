@@ -28,7 +28,7 @@ var invoiceItem = function(app) {
       if (err) {
         throw err;
       }
-      console.log(invoiceItem);
+      // console.log(invoiceItem);
       res.json(invoiceItem);
 
     });

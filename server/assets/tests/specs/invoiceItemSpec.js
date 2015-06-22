@@ -9,7 +9,7 @@ describe('Invoice item tests', function() {
 
   var URL = 'https://localhost:4443';
   var invoiceItemObj = {
-    invoiceId: "558317feee627fa68f5aab21",
+    invoiceId: "5585b661719fa48cdd857835",
     description: 'item on invoice',
     qty: 5,
     rate: 10,
