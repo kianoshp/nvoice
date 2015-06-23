@@ -51,15 +51,15 @@ var invoiceItem = function(app) {
 
   app.delete('/invoiceItem/delete', function(req, res) {
     console.log(req.body);
-    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId,
-     {$pull: {'invoiceItems': {_id: req.body.invoiceItemId}}},
-      function(err) {
+    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId, req.body.invoiceItemId, function(err, invoice) {
       if (err) {
         throw err;
       }
 
-    res.setHeader('Content-Type', 'application/json');
-    res.send({status: 'complete', isRemoved: true});
+      invoice.save();
+
+      res.setHeader('Content-Type', 'application/json');
+      res.send({status: 'complete', isRemoved: true});
     });
   });
 };

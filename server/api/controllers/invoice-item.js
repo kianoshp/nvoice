@@ -43,9 +43,13 @@ var invoiceItemAPI = {
   },
 
   deleteInvoiceItem: function(invoiceId, invoiceItemId, cb) {
-    console.log(invoiceItemId);
-    Invoice.findByIdAndUpdate(invoiceId, invoiceItemId, function(err) {
-      cb(err);
+    Invoice.findById(invoiceId, function(err, doc) {
+      for(var i = 0; i < doc.invoiceItems.length; i++) {
+        if (doc.invoiceItems[i]._id === invoiceItemId) {
+          doc.invoiceItems[i].remove();
+          cb(err, doc);
+        }
+      }
     });
   }
 };
