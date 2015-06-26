@@ -13,6 +13,8 @@ var errorHandler = require('errorhandler');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var passport = require('passport');
+var swaggerTools = require('swagger-tools');
+var swaggerObj = require('../api/docs/swagger.json');
 // TODO var passportConfig = require('./passport-config');
 var fs = require('fs');
 
@@ -30,6 +32,15 @@ var expressConfig = function(app, express) {
 
   // Create path to access.log file
   var logPath = path.join(__dirname, 'log', 'access.log');
+
+  // Swagger middleware for serving swagger.json & swagger-ui
+  swaggerTools.initializeMiddleware(swaggerObj, function(middleware) {
+    app.use(middleware.swaggerUi({
+      apiDocs: "/api-docs/swagger.json",
+      swaggerUi: "/api-docs"
+    }
+    ));
+  });
 
   // Remove x-powered-by header (doesn't let clients know we are using Express)
   app.disable('x-powered-by');
