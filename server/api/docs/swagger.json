@@ -12,6 +12,7 @@
             "name": "MIT"
         }
     },
+    "basePath": "/",
     "schemes": [
         "https",
         "http"

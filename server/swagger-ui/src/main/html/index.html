@@ -30,7 +30,7 @@
         url = "http://petstore.swagger.io/v2/swagger.json";
       }
       window.swaggerUi = new SwaggerUi({
-        url: 'https://localhost:4443/swagger',
+        url: url,
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
         onComplete: function(swaggerApi, swaggerUi){
@@ -38,7 +38,7 @@
             initOAuth({
               clientId: "your-client-id",
               realm: "your-realms",
-              appName: "nvoice"
+              appName: "your-app-name"
             });
           }
 
@@ -52,7 +52,8 @@
           log("Unable to Load SwaggerUI");
         },
         docExpansion: "none",
-        apisSorter: "alpha"
+        apisSorter: "alpha",
+        showRequestHeaders: false
       });
 
       function addApiKeyAuthorization(){
