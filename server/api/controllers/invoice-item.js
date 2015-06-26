@@ -2,6 +2,7 @@
 
 var InvoiceItem = require('../models/invoice-item');
 var Invoice = require('../models/invoice');
+var mongoose = require('mongoose');
 var _ = require('lodash');
 var R = require('ramda');
 
@@ -39,7 +40,17 @@ var invoiceItemAPI = {
   },
 
   updateInvoiceItem: function(invoiceId, invoiceItemId, invoiceItemObj, cb) {
+    var thisInvoiceItemId = mongoose.Types.ObjectId(invoiceItemId);
 
+    Invoice.findOne("_id", invoiceId)
+      .select({ "invoiceItems": { "$elemMatch": { "_id" : thisInvoiceItemId } } })
+      .exec(
+        function(err, doc) {
+          console.log(doc);
+
+          cb(err, doc);
+        }
+      );
   },
 
   deleteInvoiceItem: function(invoiceId, invoiceItemId, cb) {
