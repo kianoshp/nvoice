@@ -12,8 +12,6 @@
             "name": "MIT"
         }
     },
-    "host": "www.somedomain.org",
-    "basePath": "/v2",
     "schemes": [
         "https",
         "http"
