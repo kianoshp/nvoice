@@ -1,665 +1,665 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "Online invoicing mechanism\n",
-        "version": "0.0.0",
-        "title": "nvoice",
-        "termsOfService": "placeholder",
-        "contact": {
-            "name": "kianoshp@cieloconcepts.com"
-        },
-        "license": {
-            "name": "MIT"
-        }
+  "swagger": "2.0",
+  "info": {
+    "description": "Online invoicing mechanism\n",
+    "version": "0.0.0",
+    "title": "nvoice",
+    "termsOfService": "placeholder",
+    "contact": {
+      "name": "kianoshp@cieloconcepts.com"
     },
-    "basePath": "/",
-    "tags": [
-        {
-            "name": "Company"
-        },
-        {
-            "name": "User"
-        },
-        {
-            "name": "Invoice"
-        },
-        {
-            "name": "InvoiceItem"
-        }
-    ],
-    "schemes": [
-        "https",
-        "http"
-    ],
-    "paths": {
-        "/company/create": {
-            "post": {
-                "tags": [
-                    "Company"
-                ],
-                "summary": "Add a new company",
-                "description": "",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "Company",
-                        "description": "Company object that is to be created",
-                        "schema": {
-                            "$ref": "#/definitions/Company"
-                        }
-                    }
-                ],
-                "responses": {
-                    "405": {
-                        "description": "Invalid Input"
-                    }
-                }
-            }
-        },
-        "/company/read": {
-            "get": {
-                "tags": [
-                    "Company"
-                ],
-                "summary": "Show a single company",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "id",
-                        "description": "Company object that is being shown",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Company found"
-                    },
-                    "404": {
-                        "description": "Company not found"
-                    }
-                }
-            }
-        },
-        "/company/update": {
-            "put": {
-                "tags": [
-                    "Company"
-                ],
-                "summary": "Update a single company",
-                "description": "",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Updated company object",
-                        "schema": {
-                            "$ref": "#/definitions/Company"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Update succsessful"
-                    }
-                }
-            }
-        },
-        "/company/delete": {
-            "delete": {
-                "tags": [
-                    "Company"
-                ],
-                "summary": "Delete a single company",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Delete company object",
-                        "schema": {
-                            "$ref": "#/definitions/Company"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Company deleted"
-                    }
-                }
-            }
-        },
-        "/user/create": {
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Add a new user",
-                "description": "",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "User",
-                        "description": "User object to be created",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                ],
-                "responses": {
-                    "405": {
-                        "description": "Invalid Input"
-                    }
-                }
-            }
-        },
-        "/user/read": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Show a single user",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "id",
-                        "description": "User object that is being shown",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User found"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            }
-        },
-        "/user/update": {
-            "put": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Update a single user",
-                "description": "",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Updated user object",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Update succsessful"
-                    }
-                }
-            }
-        },
-        "/user/delete": {
-            "delete": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Delete a single user",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Delete user object",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User deleted"
-                    }
-                }
-            }
-        },
-        "/invoice/create": {
-            "post": {
-                "tags": [
-                    "Invoice"
-                ],
-                "summary": "Add a new invoice",
-                "description": "",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "Invoice",
-                        "description": "Invoice object to be created",
-                        "schema": {
-                            "$ref": "#/definitions/Invoice"
-                        }
-                    }
-                ],
-                "responses": {
-                    "405": {
-                        "description": "Invalid Input"
-                    }
-                }
-            }
-        },
-        "/invoice/read": {
-            "get": {
-                "tags": [
-                    "Invoice"
-                ],
-                "summary": "Show a single invoice",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "id",
-                        "description": "Invoice object that is being shown",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Invoice found"
-                    },
-                    "404": {
-                        "description": "Invoice not found"
-                    }
-                }
-            }
-        },
-        "/invoice/update": {
-            "put": {
-                "tags": [
-                    "Invoice"
-                ],
-                "summary": "Update a single invoice",
-                "description": "",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Updated invoice object",
-                        "schema": {
-                            "$ref": "#/definitions/Invoice"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Update succsessful"
-                    }
-                }
-            }
-        },
-        "/invoice/delete": {
-            "delete": {
-                "tags": [
-                    "Invoice"
-                ],
-                "summary": "Delete a single invoice",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Delete invoice object",
-                        "schema": {
-                            "$ref": "#/definitions/Invoice"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Invoice deleted"
-                    }
-                }
-            }
-        },
-        "/invoiceItem/create": {
-            "post": {
-                "tags": [
-                    "InvoiceItem"
-                ],
-                "summary": "Add a new invoiceItem",
-                "description": "",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "InvoiceItem",
-                        "description": "InvoiceItem object to be created",
-                        "schema": {
-                            "$ref": "#/definitions/InvoiceItem"
-                        }
-                    }
-                ],
-                "responses": {
-                    "405": {
-                        "description": "Invalid Input"
-                    }
-                }
-            }
-        },
-        "/invoiceItem/read": {
-            "get": {
-                "tags": [
-                    "InvoiceItem"
-                ],
-                "summary": "Show a single invoiceItem",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "id",
-                        "description": "InvoiceItem object that is being shown",
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "InvoiceItem found"
-                    },
-                    "404": {
-                        "description": "InvoiceItem not found"
-                    }
-                }
-            }
-        },
-        "/invoiceItem/update": {
-            "put": {
-                "tags": [
-                    "InvoiceItem"
-                ],
-                "summary": "Update a single invoiceItem",
-                "description": "",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Updated invoiceItem object",
-                        "schema": {
-                            "$ref": "#/definitions/InvoiceItem"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Update succsessful"
-                    }
-                }
-            }
-        },
-        "/invoiceItem/delete": {
-            "delete": {
-                "tags": [
-                    "InvoiceItem"
-                ],
-                "summary": "Delete a single invoiceItem",
-                "description": "",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Delete invoiceItem object",
-                        "schema": {
-                            "$ref": "#/definitions/InvoiceItem"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "InvoiceItem deleted"
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "Company": {
-            "required": [
-                "companyName",
-                "isParent",
-                "address1",
-                "address2",
-                "city",
-                "state",
-                "country",
-                "zip",
-                "phone",
-                "email"
-            ],
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "companyName": {
-                    "type": "string"
-                },
-                "isParent": {
-                    "type": "boolean"
-                },
-                "address1": {
-                    "type": "string"
-                },
-                "address2": {
-                    "type": "string"
-                },
-                "city": {
-                    "type": "string"
-                },
-                "state": {
-                    "type": "string"
-                },
-                "country": {
-                    "type": "string"
-                },
-                "zip": {
-                    "type": "string"
-                },
-                "clients": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Company"
-                    }
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "fax": {
-                    "type": "string"
-                },
-                "cell": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "created": {
-                    "type": "string",
-                    "format": "date-time"
-                }
-            }
-        },
-        "User": {
-            "required": [
-                "firstName",
-                "lastName",
-                "password",
-                "email"
-            ],
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "firstName": {
-                    "type": "string"
-                },
-                "lastName": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "company": {
-                    "$ref": "#/definitions/Company"
-                },
-                "role": {
-                    "type": "string"
-                }
-            }
-        },
-        "Invoice": {
-            "required": [
-                "title",
-                "status"
-            ],
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "clientId": {
-                    "type": "string"
-                },
-                "companyId": {
-                    "type": "string"
-                },
-                "poNumber": {
-                    "type": "number"
-                },
-                "invoiceNUmber": {
-                    "type": "number"
-                },
-                "taxApplied": {
-                    "type": "boolean"
-                },
-                "feeApplied": {
-                    "type": "boolean"
-                },
-                "lastUpdated": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "createdOn": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "status": {
-                    "type": "string"
-                }
-            }
-        },
-        "InvoiceItem": {
-            "required": [
-                "invoiceId"
-            ],
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "invoiceId": {
-                    "type": "string"
-                },
-                "description": {
-                    "type": "string"
-                },
-                "qty": {
-                    "type": "number"
-                },
-                "rate": {
-                    "type": "number"
-                },
-                "isFlatFee": {
-                    "type": "boolean"
-                }
-            }
-        }
+    "license": {
+      "name": "MIT"
     }
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Company"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Invoice"
+    },
+    {
+      "name": "InvoiceItem"
+    }
+  ],
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/company/create": {
+      "post": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Add a new company",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Company",
+            "description": "Company object that is to be created",
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid Input"
+          }
+        }
+      }
+    },
+    "/company/read": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Show a single company",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "Company object that is being shown",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company found"
+          },
+          "404": {
+            "description": "Company not found"
+          }
+        }
+      }
+    },
+    "/company/update": {
+      "put": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Update a single company",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated company object",
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succsessful"
+          }
+        }
+      }
+    },
+    "/company/delete": {
+      "delete": {
+        "tags": [
+          "Company"
+        ],
+        "summary": "Delete a single company",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete company object",
+            "schema": {
+              "$ref": "#/definitions/Company"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company deleted"
+          }
+        }
+      }
+    },
+    "/user/create": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add a new user",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "User",
+            "description": "User object to be created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid Input"
+          }
+        }
+      }
+    },
+    "/user/read": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Show a single user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "User object that is being shown",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/user/update": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update a single user",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user object",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succsessful"
+          }
+        }
+      }
+    },
+    "/user/delete": {
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete a single user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete user object",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User deleted"
+          }
+        }
+      }
+    },
+    "/invoice/create": {
+      "post": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Add a new invoice",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Invoice",
+            "description": "Invoice object to be created",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid Input"
+          }
+        }
+      }
+    },
+    "/invoice/read": {
+      "get": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Show a single invoice",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "Invoice object that is being shown",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice found"
+          },
+          "404": {
+            "description": "Invoice not found"
+          }
+        }
+      }
+    },
+    "/invoice/update": {
+      "put": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Update a single invoice",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated invoice object",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succsessful"
+          }
+        }
+      }
+    },
+    "/invoice/delete": {
+      "delete": {
+        "tags": [
+          "Invoice"
+        ],
+        "summary": "Delete a single invoice",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete invoice object",
+            "schema": {
+              "$ref": "#/definitions/Invoice"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Invoice deleted"
+          }
+        }
+      }
+    },
+    "/invoiceItem/create": {
+      "post": {
+        "tags": [
+          "InvoiceItem"
+        ],
+        "summary": "Add a new invoiceItem",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "InvoiceItem",
+            "description": "InvoiceItem object to be created",
+            "schema": {
+              "$ref": "#/definitions/InvoiceItem"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid Input"
+          }
+        }
+      }
+    },
+    "/invoiceItem/read": {
+      "get": {
+        "tags": [
+          "InvoiceItem"
+        ],
+        "summary": "Show a single invoiceItem",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "description": "InvoiceItem object that is being shown",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "InvoiceItem found"
+          },
+          "404": {
+            "description": "InvoiceItem not found"
+          }
+        }
+      }
+    },
+    "/invoiceItem/update": {
+      "put": {
+        "tags": [
+          "InvoiceItem"
+        ],
+        "summary": "Update a single invoiceItem",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated invoiceItem object",
+            "schema": {
+              "$ref": "#/definitions/InvoiceItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update succsessful"
+          }
+        }
+      }
+    },
+    "/invoiceItem/delete": {
+      "delete": {
+        "tags": [
+          "InvoiceItem"
+        ],
+        "summary": "Delete a single invoiceItem",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Delete invoiceItem object",
+            "schema": {
+              "$ref": "#/definitions/InvoiceItem"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "InvoiceItem deleted"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Company": {
+      "required": [
+        "companyName",
+        "isParent",
+        "address1",
+        "address2",
+        "city",
+        "state",
+        "country",
+        "zip",
+        "phone",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "isParent": {
+          "type": "boolean"
+        },
+        "address1": {
+          "type": "string"
+        },
+        "address2": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "zip": {
+          "type": "string"
+        },
+        "clients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Company"
+          }
+        },
+        "phone": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "cell": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "User": {
+      "required": [
+        "firstName",
+        "lastName",
+        "password",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/Company"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "Invoice": {
+      "required": [
+        "title",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": "string"
+        },
+        "poNumber": {
+          "type": "number"
+        },
+        "invoiceNUmber": {
+          "type": "number"
+        },
+        "taxApplied": {
+          "type": "boolean"
+        },
+        "feeApplied": {
+          "type": "boolean"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "createdOn": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "InvoiceItem": {
+      "required": [
+        "invoiceId"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "invoiceId": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "qty": {
+          "type": "number"
+        },
+        "rate": {
+          "type": "number"
+        },
+        "isFlatFee": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
 }
