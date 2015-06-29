@@ -75,7 +75,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "id",
+            "name": "companyId",
             "description": "Company object that is being shown",
             "type": "string"
           }
@@ -190,7 +190,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "id",
+            "name": "userId",
             "description": "User object that is being shown",
             "type": "string"
           }
@@ -305,7 +305,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "id",
+            "name": "invoiceId",
             "description": "Invoice object that is being shown",
             "type": "string"
           }
@@ -420,7 +420,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "id",
+            "name": "invoiceItemId",
             "description": "InvoiceItem object that is being shown",
             "type": "string"
           }

@@ -18,7 +18,6 @@ var company = function(app) {
 
   app.get('/company/read', function(req, res) {
     var companyId = req.query.companyId || req.body.companyId;
-
     companyAPI.readCompany(companyId, function(err, company) {
       if (err) {
         throw err;
