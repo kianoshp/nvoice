@@ -11,9 +11,9 @@ var invoiceItem = function(app) {
       thisInvoiceId,
       {$push: {'invoiceItems': thisItem}},
       {safe: true, upsert: true, new: true},
-      function(err, invoiceItem) {
+      function(err, invoiceItem, next) {
         if (err) {
-          throw err;
+          next(err);
         }
 
         res.json(invoiceItem);
@@ -24,9 +24,9 @@ var invoiceItem = function(app) {
     var invoiceId = req.query.invoiceId || req.body.invoiceId;
     var invoiceItemId = req.query.invoiceItemId || req.body.invoiceItemId;
 
-    invoiceItemAPI.readInvoiceItem(invoiceId, invoiceItemId, function(err, invoiceItem) {
+    invoiceItemAPI.readInvoiceItem(invoiceId, invoiceItemId, function(err, invoiceItem, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(invoiceItem);

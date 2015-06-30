@@ -21,8 +21,8 @@ var invoiceItemAPI = {
   },
 
   createInvoiceItem: function(invoiceId, invoiceItemObj, options, cb) {
-    Invoice.findByIdAndUpdate(invoiceId, invoiceItemObj, options, function(err, doc) {
-      cb(err, doc);
+    Invoice.findByIdAndUpdate(invoiceId, invoiceItemObj, options, function(err, doc, next) {
+      cb(err, doc, next);
     });
   },
 
