@@ -4,7 +4,7 @@ var invoiceItemAPI = require('./../api/controllers/invoice-item');
 
 var invoiceItem = function(app) {
   app.post('/invoiceItem/create', function(req, res) {
-    var thisItem = invoiceItemAPI.createInvoiceItemObj(req);
+    var thisItem = invoiceItemAPI.createInvoiceItemObj(req.body);
     var thisInvoiceId = req.body.invoiceId;
 
     invoiceItemAPI.createInvoiceItem(
@@ -56,10 +56,7 @@ var invoiceItem = function(app) {
         throw err;
       }
 
-      invoice.save();
-
-      res.setHeader('Content-Type', 'application/json');
-      res.send({status: 'complete', isRemoved: true});
+      res.json({status: 'complete', isRemoved: true, invoice: invoice});
     });
   });
 };
