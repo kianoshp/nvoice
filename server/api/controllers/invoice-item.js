@@ -2,19 +2,19 @@
 
 var InvoiceItem = require('../models/invoice-item');
 var Invoice = require('../models/invoice');
+var mongoose = require('mongoose');
 var _ = require('lodash');
 var R = require('ramda');
 
 var invoiceItemAPI = {
   invoiceItem: {},
 
-  createInvoiceItemObj: function(req) {
+  createInvoiceItemObj: function(invoiceItem) {
     var invoiceItemObject = new InvoiceItem({
-      invoiceId: req.body.invoiceId,
-      description: req.body.description,
-      qty: req.body.qty,
-      rate: req.body.rate,
-      isFlatFee: req.body.isFlatFee
+      description: invoiceItem.description,
+      qty: invoiceItem.qty,
+      rate: invoiceItem.rate,
+      isFlatFee: invoiceItem.isFlatFee
     });
 
     return invoiceItemObject;
@@ -27,26 +27,47 @@ var invoiceItemAPI = {
   },
 
   readInvoiceItem: function(invoiceId, invoiceItemId, cb) {
-    Invoice.findById(
-      invoiceId, function(err,doc) {
-        var thisInvoiceItem = doc.invoiceItems.filter(function(invoiceItem) {
-          return invoiceItem._id.toString() === invoiceItemId;
-        }).pop();
+    var thisInvoiceItemId = mongoose.Types.ObjectId(invoiceItemId);
 
-        cb(err, thisInvoiceItem);
-      }
-    );
+    Invoice.findOne("_id", invoiceId)
+      .select({ "invoiceItems": { "$elemMatch": { "_id" : thisInvoiceItemId } } })
+      .exec(
+        function(err, doc) {
+          console.log(doc);
+
+          cb(err, doc);
+        }
+      );
   },
 
   updateInvoiceItem: function(invoiceId, invoiceItemId, invoiceItemObj, cb) {
+    var thisInvoiceItemId = mongoose.Types.ObjectId(invoiceItemId);
 
+    var invoiceItemobject = this.createInvoiceItemObj(invoiceItemObj);
+
+    Invoice.findOneAndUpdate({ $and: [ { "_id": invoiceId }, { "invoiceItems._id": thisInvoiceItemId } ] },
+        { $set: { "invoiceItems.$": invoiceItemobject } },
+        { upsert: true, new: true },
+        function(err, doc) {
+          console.log(doc);
+
+          cb(err, doc)
+        }
+      );
   },
 
   deleteInvoiceItem: function(invoiceId, invoiceItemId, cb) {
-    console.log(invoiceItemId);
-    Invoice.findByIdAndUpdate(invoiceId, invoiceItemId, function(err) {
-      cb(err);
-    });
+    var thisInvoiceItemId = mongoose.Types.ObjectId(invoiceItemId);
+
+    Invoice.findOneAndUpdate({ "_id": invoiceId },
+        { $pull: { "invoiceItems": { _id: thisInvoiceItemId } } },
+        { new: true },
+        function(err, doc) {
+          console.log(doc);
+
+          cb(err, doc)
+        }
+      );
   }
 };
 
