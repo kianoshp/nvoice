@@ -32,10 +32,9 @@ var invoiceItemAPI = {
     Invoice.findOne("_id", invoiceId)
       .select({ "invoiceItems": { "$elemMatch": { "_id" : thisInvoiceItemId } } })
       .exec(
-        function(err, doc) {
-          console.log(doc);
+        function(err, doc, next) {
 
-          cb(err, doc);
+          cb(err, doc, next);
         }
       );
   },
@@ -48,10 +47,9 @@ var invoiceItemAPI = {
     Invoice.findOneAndUpdate({ $and: [ { "_id": invoiceId }, { "invoiceItems._id": thisInvoiceItemId } ] },
         { $set: { "invoiceItems.$": invoiceItemobject } },
         { upsert: true, new: true },
-        function(err, doc) {
-          console.log(doc);
+        function(err, doc, next) {
 
-          cb(err, doc)
+          cb(err, doc, next);
         }
       );
   },
@@ -62,10 +60,9 @@ var invoiceItemAPI = {
     Invoice.findOneAndUpdate({ "_id": invoiceId },
         { $pull: { "invoiceItems": { _id: thisInvoiceItemId } } },
         { new: true },
-        function(err, doc) {
-          console.log(doc);
+        function(err, doc, next) {
 
-          cb(err, doc)
+          cb(err, doc, next);
         }
       );
   }

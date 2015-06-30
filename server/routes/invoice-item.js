@@ -40,9 +40,9 @@ var invoiceItem = function(app) {
     var updatedInvoiceItem = req.query.invoiceItemObj || req.body.invoiceItemObj;
 
     invoiceItemAPI.updateInvoiceItem(invoiceId,
-      invoiceItemId, updatedInvoiceItem, function(err, invoiceItem) {
+      invoiceItemId, updatedInvoiceItem, function(err, invoiceItem, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(invoiceItem);
@@ -51,9 +51,9 @@ var invoiceItem = function(app) {
 
   app.delete('/invoiceItem/delete', function(req, res) {
     console.log(req.body);
-    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId, req.body.invoiceItemId, function(err, invoice) {
+    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId, req.body.invoiceItemId, function(err, invoice, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json({status: 'complete', isRemoved: true, invoice: invoice});
