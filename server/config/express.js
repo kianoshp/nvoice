@@ -115,6 +115,11 @@ var expressConfig = function(app, express) {
   // Load routes
   require(path.join(settings.root, './server/routes'))(app);
 
+  app.use(function(err, req, res, next) {
+    console.log(err);
+    next();
+  });
+
   // 404 Error Handler
   app.use(function(req, res) {
     res.status(404);

@@ -28,24 +28,24 @@ var companyAPI = {
   },
 
   createCompany: function(companyObj, cb) {
-    companyObj.save(function(err) {
+    companyObj.save(function(err, next) {
 
-      cb(err, companyObj);
+      cb(err, companyObj, next);
     });
   },
 
   readCompany: function(companyId, cb) {
-    Company.findById(companyId, function(err, doc) {
+    Company.findById(companyId, function(err, doc, next) {
 
-      cb(err, doc);
+      cb(err, doc, next);
     });
   },
 
   updateCompany: function(companyId, companyObj, options, cb) {
     Company.findByIdAndUpdate(companyId, companyObj,
-      options, function(err, doc) {
+      options, function(err, doc, next) {
 
-        cb(err, doc);
+        cb(err, doc, next);
       });
   },
 

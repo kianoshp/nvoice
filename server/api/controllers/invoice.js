@@ -24,24 +24,24 @@ var invoiceAPI = {
   },
 
   createInvoice: function(invoiceObj, cb) {
-    invoiceObj.save(function(err) {
+    invoiceObj.save(function(err, next) {
 
-      cb(err, invoiceObj);
+      cb(err, invoiceObj, next);
     });
   },
 
   readInvoice: function(invoiceId, cb) {
-    Invoice.findById(invoiceId, function(err, doc) {
+    Invoice.findById(invoiceId, function(err, doc, next) {
 
-      cb(err, doc);
+      cb(err, doc, next);
     });
   },
 
   upddateInvoice: function(invoiceId, invoiceObj, options, cb) {
     Invoice.findByIdAndUpdate(invoiceId, invoiceObj,
-      options, function(err, doc) {
+      options, function(err, doc, next) {
 
-        cb(err, doc);
+        cb(err, doc, next);
       });
   },
 
