@@ -7,9 +7,9 @@ var user = function(app) {
   app.post('/user/create', function(req, res) {
     var thisUser = userAPI.createUserObj(req);
 
-    userAPI.createUser(thisUser, function(err, user) {
+    userAPI.createUser(thisUser, function(err, user, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(user);
@@ -19,9 +19,9 @@ var user = function(app) {
   app.get('/user/read', function(req, res) {
     var userId = req.query.userId || req.body.userId;
 
-    userAPI.readUser(userId, function(err, user) {
+    userAPI.readUser(userId, function(err, user, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(user);
@@ -30,9 +30,9 @@ var user = function(app) {
 
   app.put('/user/update', function(req, res) {
     userAPI.updateUser(req.body.userId, req.body.userObj,
-     {new: true}, function(err, user) {
+     {new: true}, function(err, user, next) {
         if (err) {
-          throw err;
+          next(err);
         }
 
         res.json(user);

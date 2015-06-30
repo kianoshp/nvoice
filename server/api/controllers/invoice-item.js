@@ -21,19 +21,19 @@ var invoiceItemAPI = {
   },
 
   createInvoiceItem: function(invoiceId, invoiceItemObj, options, cb) {
-    Invoice.findByIdAndUpdate(invoiceId, invoiceItemObj, options, function(err, doc) {
-      cb(err, doc);
+    Invoice.findByIdAndUpdate(invoiceId, invoiceItemObj, options, function(err, doc, next) {
+      cb(err, doc, next);
     });
   },
 
   readInvoiceItem: function(invoiceId, invoiceItemId, cb) {
     Invoice.findById(
-      invoiceId, function(err,doc) {
+      invoiceId, function(err, doc, next) {
         var thisInvoiceItem = doc.invoiceItems.filter(function(invoiceItem) {
           return invoiceItem._id.toString() === invoiceItemId;
         }).pop();
 
-        cb(err, thisInvoiceItem);
+        cb(err, thisInvoiceItem, next);
       }
     );
   },
