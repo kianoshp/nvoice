@@ -22,7 +22,7 @@ describe('Invoice item tests', function() {
     description: 'item on invoice',
     qty: 100,
     rate: 10,
-    isFlatFee: true
+    isFlatFee: false
   };
   /*jshint -W030 */
   describe('CRUD actions', function() {
@@ -74,13 +74,14 @@ describe('Invoice item tests', function() {
           })
           .end(function(err, res) {
             if (err) {
-              // console.log(err);
+              console.log(err);
             }
-            var thisItem = res.body;
-            chai.expect(thisItem).to.exist;
-            chai.expect(thisItem).to.not.be.undefined;
-            chai.expect(thisItem.qty).to
+            chai.expect(res.body).to.exist;
+            chai.expect(res.body).to.not.be.undefined;
+            chai.expect(res.body.invoiceItems[0].qty).to
               .equal(modifiedItem.qty);
+            chai.expect(res.body.invoiceItems[0].isFlatFee)
+              .to.equal(modifiedItem.isFlatFee);
             done();
           });
       });

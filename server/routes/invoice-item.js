@@ -36,7 +36,7 @@ var invoiceItem = function(app) {
   app.put('/invoiceItem/update', function(req, res) {
     var invoiceId = req.query.invoiceId || req.body.invoiceId;
     var invoiceItemId = req.query.invoiceItemId || req.body.invoiceItemId;
-    var updatedInvoiceItem = req.query.invoiceItemObj || req.body.invoiceItemObj;
+    var updatedInvoiceItem = req.query.ItemObj || req.body.itemObj;
 
     invoiceItemAPI.updateInvoiceItem(invoiceId,
       invoiceItemId, updatedInvoiceItem, function(err, invoiceItem) {
