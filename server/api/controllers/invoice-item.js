@@ -29,11 +29,10 @@ var invoiceItemAPI = {
   readInvoiceItem: function(invoiceId, invoiceItemId, cb) {
     var thisInvoiceItemId = mongoose.Types.ObjectId(invoiceItemId);
 
-    Invoice.findOne("_id", invoiceId)
+    Invoice.findOne({"_id": invoiceId})
       .select({ "invoiceItems": { "$elemMatch": { "_id" : thisInvoiceItemId } } })
       .exec(
         function(err, doc) {
-          console.log(doc);
 
           cb(err, doc);
         }
@@ -49,9 +48,8 @@ var invoiceItemAPI = {
         { $set: { "invoiceItems.$": invoiceItemobject } },
         { upsert: true, new: true },
         function(err, doc) {
-          console.log(doc);
 
-          cb(err, doc)
+          cb(err, doc);
         }
       );
   },
@@ -63,9 +61,8 @@ var invoiceItemAPI = {
         { $pull: { "invoiceItems": { _id: thisInvoiceItemId } } },
         { new: true },
         function(err, doc) {
-          console.log(doc);
 
-          cb(err, doc)
+          cb(err, doc);
         }
       );
   }

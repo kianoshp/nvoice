@@ -29,8 +29,7 @@ var invoiceItem = function(app) {
         throw err;
       }
 
-      res.json(invoiceItem);
-
+      res.json(invoiceItem.invoiceItems[0]);
     });
   });
 
