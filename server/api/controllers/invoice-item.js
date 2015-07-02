@@ -3,8 +3,6 @@
 var InvoiceItem = require('../models/invoice-item');
 var Invoice = require('../models/invoice');
 var mongoose = require('mongoose');
-var _ = require('lodash');
-var R = require('ramda');
 
 var invoiceItemAPI = {
   invoiceItem: {},
@@ -21,7 +19,8 @@ var invoiceItemAPI = {
   },
 
   createInvoiceItem: function(invoiceId, invoiceItemObj, options, cb) {
-    Invoice.findByIdAndUpdate(invoiceId, invoiceItemObj, options, function(err, doc) {
+    Invoice.findByIdAndUpdate(invoiceId, invoiceItemObj,
+     options, function(err, doc) {
       cb(err, doc);
     });
   },
@@ -29,11 +28,11 @@ var invoiceItemAPI = {
   readInvoiceItem: function(invoiceId, invoiceItemId, cb) {
     var thisInvoiceItemId = mongoose.Types.ObjectId(invoiceItemId);
 
-    Invoice.findOne("_id", invoiceId)
-      .select({ "invoiceItems": { "$elemMatch": { "_id" : thisInvoiceItemId } } })
+    Invoice.findOne({"_id": invoiceId})
+      .select({ "invoiceItems": { "$elemMatch": { "_id": thisInvoiceItemId
+       } } })
       .exec(
         function(err, doc) {
-          console.log(doc);
 
           cb(err, doc);
         }
@@ -45,13 +44,13 @@ var invoiceItemAPI = {
 
     var invoiceItemobject = this.createInvoiceItemObj(invoiceItemObj);
 
-    Invoice.findOneAndUpdate({ $and: [ { "_id": invoiceId }, { "invoiceItems._id": thisInvoiceItemId } ] },
+    Invoice.findOneAndUpdate({ $and: [ { "_id": invoiceId },
+     { "invoiceItems._id": thisInvoiceItemId } ] },
         { $set: { "invoiceItems.$": invoiceItemobject } },
         { upsert: true, new: true },
         function(err, doc) {
-          console.log(doc);
 
-          cb(err, doc)
+          cb(err, doc);
         }
       );
   },
@@ -63,9 +62,8 @@ var invoiceItemAPI = {
         { $pull: { "invoiceItems": { _id: thisInvoiceItemId } } },
         { new: true },
         function(err, doc) {
-          console.log(doc);
 
-          cb(err, doc)
+          cb(err, doc);
         }
       );
   }

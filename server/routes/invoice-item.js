@@ -24,20 +24,20 @@ var invoiceItem = function(app) {
     var invoiceId = req.query.invoiceId || req.body.invoiceId;
     var invoiceItemId = req.query.invoiceItemId || req.body.invoiceItemId;
 
-    invoiceItemAPI.readInvoiceItem(invoiceId, invoiceItemId, function(err, invoiceItem) {
+    invoiceItemAPI.readInvoiceItem(invoiceId, invoiceItemId,
+     function(err, invoiceItem) {
       if (err) {
         throw err;
       }
 
-      res.json(invoiceItem);
-
+      res.json(invoiceItem.invoiceItems[0]);
     });
   });
 
   app.put('/invoiceItem/update', function(req, res) {
     var invoiceId = req.query.invoiceId || req.body.invoiceId;
     var invoiceItemId = req.query.invoiceItemId || req.body.invoiceItemId;
-    var updatedInvoiceItem = req.query.invoiceItemObj || req.body.invoiceItemObj;
+    var updatedInvoiceItem = req.query.ItemObj || req.body.itemObj;
 
     invoiceItemAPI.updateInvoiceItem(invoiceId,
       invoiceItemId, updatedInvoiceItem, function(err, invoiceItem) {
@@ -51,7 +51,8 @@ var invoiceItem = function(app) {
 
   app.delete('/invoiceItem/delete', function(req, res) {
     console.log(req.body);
-    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId, req.body.invoiceItemId, function(err, invoice) {
+    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId,
+     req.body.invoiceItemId, function(err, invoice) {
       if (err) {
         throw err;
       }

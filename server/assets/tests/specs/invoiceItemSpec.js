@@ -8,19 +8,19 @@ var superagent = require('superagent');
 describe('Invoice item tests', function() {
 
   var URL = 'https://localhost:4443';
-  // var invoiceObj = {
-  //   title: 'test invoice',
-  //   description: 'invoice',
-  //   poNumber: 123454,
-  //   invoiceNumber: 1111,
-  //   taxApplied: true,
-  //   feeApplied: true,
-  //   status: 'entered',
-  //   invoiceItems: []
-  // };
-  var currentInvoiceId = "558317feee627fa68f5aab21";
+  var invoiceObj = {
+    title: 'invoice2',
+    description: 'test invoice',
+    poNumber: 12456,
+    invoiceNumber: 1002,
+    taxApplied: true,
+    feeApplied: true,
+    status: 'entered',
+    invoiceItems: []
+  };
+  var currentInvoiceId;
   var invoiceItemObj = {
-    invoiceId: "558317feee627fa68f5aab21",
+    invoiceId: currentInvoiceId,
     description: 'item on invoice',
     qty: 5,
     rate: 10,
@@ -28,35 +28,32 @@ describe('Invoice item tests', function() {
   };
   var currentItemId;
   var modifiedItem = {
-    invoiceId: "558039a859496aeaecffeda8",
+    invoiceId: currentInvoiceId,
     description: 'item on invoice',
     qty: 100,
     rate: 10,
-    isFlatFee: true
+    isFlatFee: false
   };
   /*jshint -W030 */
   describe('CRUD actions', function() {
 
-    // describe('Make Invoice', function() {
-    //   it('should create an invoice for testing', function(done) {
-    //     superagent.post(URL + '/invoice/create')
-    //       .send(invoiceObj)
-    //       .end(function(err, res) {
-    //         invoiceObj = res.body;
-    //         currentInvoiceId = res.body._id;
-    //         chai.expect(invoiceObj).to.exist;
-    //         chai.expect(invoiceObj).to.not.be.undefined;
-    //         chai.expect(invoiceObj.title).to
-    //           .equal(invoiceObj.title);
-    //         done();
-    //       });
-    //   });
-    // });
+    before(function(done) {
+      superagent.post(URL + '/invoice/create')
+          .send(invoiceObj)
+          .end(function(err, res) {
+            invoiceObj = res.body;
+            currentInvoiceId = res.body._id;
+            done();
+          });
+    });
 
     describe('Create', function() {
       it('should create an invoiceItem', function(done) {
         superagent.post(URL + '/invoiceItem/create')
-          .send(invoiceItemObj)
+          .send({
+            invoiceId: currentInvoiceId,
+            invoiceItemObj: invoiceItemObj
+          })
           .end(function(err, res) {
             invoiceItemObj = res.body;
             currentItemId = res.body.invoiceItems[0]._id;
@@ -83,8 +80,8 @@ describe('Invoice item tests', function() {
             var thisItem = res.body;
             chai.expect(thisItem).to.exist;
             chai.expect(thisItem).to.not.be.undefined;
-            chai.expect(thisItem.description).to
-              .equal('item on invoice');
+            chai.expect(thisItem._id).to
+              .equal(invoiceItemObj.invoiceItems[0]._id);
             done();
           });
       });
@@ -102,12 +99,12 @@ describe('Invoice item tests', function() {
             if (err) {
               console.log(err);
             }
-            var thisItem = res.body;
-            console.log(thisItem);
-            chai.expect(thisItem).to.exist;
-            chai.expect(thisItem).to.not.be.undefined;
-            chai.expect(thisItem.qty).to
+            chai.expect(res.body).to.exist;
+            chai.expect(res.body).to.not.be.undefined;
+            chai.expect(res.body.invoiceItems[0].qty).to
               .equal(modifiedItem.qty);
+            chai.expect(res.body.invoiceItems[0].isFlatFee)
+              .to.equal(modifiedItem.isFlatFee);
             done();
           });
       });
@@ -132,26 +129,6 @@ describe('Invoice item tests', function() {
           });
       });
     });
-
-    // describe('Delete testing invoice', function() {
-    //   it('should delete a the invoice', function(done) {
-    //     superagent.del(URL + '/invoice/delete')
-    //       .send({
-    //         invoiceId: currentInvoiceId
-    //       })
-    //       .end(function(err, res) {
-    //         if (err) {
-    //           console.log(err);
-    //         }
-    //         chai.expect(res.statusCode).to.equal(200);
-    //         chai.expect(res.body).to.exist;
-    //         chai.expect(res.body.status).to.equal('complete');
-    //         chai.expect(res.body.isRemoved).to.be.true;
-    //         done();
-    //       });
-    //   });
-    // });
-
     /*jshint -W030 */
   });
 });
