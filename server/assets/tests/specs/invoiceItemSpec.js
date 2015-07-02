@@ -8,9 +8,19 @@ var superagent = require('superagent');
 describe('Invoice item tests', function() {
 
   var URL = 'https://localhost:4443';
-  var currentInvoiceId = '558317feee627fa68f5aab21';
+  var invoiceObj = {
+    title: 'invoice2',
+    description: 'test invoice',
+    poNumber: 12456,
+    invoiceNumber: 1002,
+    taxApplied: true,
+    feeApplied: true,
+    status: 'entered',
+    invoiceItems: []
+  };
+  var currentInvoiceId;
   var invoiceItemObj = {
-    invoiceId: '558317feee627fa68f5aab21',
+    invoiceId: currentInvoiceId,
     description: 'item on invoice',
     qty: 5,
     rate: 10,
@@ -18,7 +28,7 @@ describe('Invoice item tests', function() {
   };
   var currentItemId;
   var modifiedItem = {
-    invoiceId: '558317feee627fa68f5aab21',
+    invoiceId: currentInvoiceId,
     description: 'item on invoice',
     qty: 100,
     rate: 10,
@@ -27,10 +37,23 @@ describe('Invoice item tests', function() {
   /*jshint -W030 */
   describe('CRUD actions', function() {
 
+    before(function(done) {
+      superagent.post(URL + '/invoice/create')
+          .send(invoiceObj)
+          .end(function(err, res) {
+            invoiceObj = res.body;
+            currentInvoiceId = res.body._id;
+            done();
+          });
+    });
+
     describe('Create', function() {
       it('should create an invoiceItem', function(done) {
         superagent.post(URL + '/invoiceItem/create')
-          .send(invoiceItemObj)
+          .send({
+            invoiceId: currentInvoiceId,
+            invoiceItemObj: invoiceItemObj
+          })
           .end(function(err, res) {
             invoiceItemObj = res.body;
             currentItemId = res.body.invoiceItems[0]._id;
@@ -57,8 +80,8 @@ describe('Invoice item tests', function() {
             var thisItem = res.body;
             chai.expect(thisItem).to.exist;
             chai.expect(thisItem).to.not.be.undefined;
-            chai.expect(thisItem.description).to
-              .equal('item on invoice');
+            chai.expect(thisItem._id).to
+              .equal(invoiceItemObj.invoiceItems[0]._id);
             done();
           });
       });
@@ -106,7 +129,6 @@ describe('Invoice item tests', function() {
           });
       });
     });
-
     /*jshint -W030 */
   });
 });

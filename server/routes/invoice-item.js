@@ -9,7 +9,7 @@ var invoiceItem = function(app) {
 
     invoiceItemAPI.createInvoiceItem(
       thisInvoiceId,
-      {$push: {invoiceItems: thisItem}},
+      {$push: {'invoiceItems': thisItem}},
       {safe: true, upsert: true, new: true},
       function(err, invoiceItem) {
         if (err) {
