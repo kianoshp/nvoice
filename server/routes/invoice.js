@@ -7,9 +7,9 @@ var invoice = function(app) {
   app.post('/invoice/create', function(req, res) {
     var thisInvoice = invoiceAPI.createInvoiceObj(req);
 
-    invoiceAPI.createInvoice(thisInvoice, function(err, invoiceObj) {
+    invoiceAPI.createInvoice(thisInvoice, function(err, invoiceObj, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(invoiceObj);
@@ -19,9 +19,9 @@ var invoice = function(app) {
   app.get('/invoice/read', function(req, res) {
     var invoiceId = req.query.invoiceId || req.body.invoiceId;
 
-    invoiceAPI.readInvoice(invoiceId, function(err, invoice) {
+    invoiceAPI.readInvoice(invoiceId, function(err, invoice, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(invoice);
@@ -30,9 +30,9 @@ var invoice = function(app) {
 
   app.put('/invoice/update', function(req, res) {
     invoiceAPI.upddateInvoice(req.body.invoiceId, req.body.invoiceObj,
-      {new: true}, function(err, invoice) {
+      {new: true}, function(err, invoice, next) {
         if (err) {
-          throw err;
+          next(err);
         }
 
         res.json(invoice);
