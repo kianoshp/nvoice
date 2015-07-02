@@ -9,7 +9,7 @@ var invoiceItem = function(app) {
 
     invoiceItemAPI.createInvoiceItem(
       thisInvoiceId,
-      {$push: {'invoiceItems': thisItem}},
+      {$push: {invoiceItems: thisItem}},
       {safe: true, upsert: true, new: true},
       function(err, invoiceItem) {
         if (err) {
@@ -24,7 +24,8 @@ var invoiceItem = function(app) {
     var invoiceId = req.query.invoiceId || req.body.invoiceId;
     var invoiceItemId = req.query.invoiceItemId || req.body.invoiceItemId;
 
-    invoiceItemAPI.readInvoiceItem(invoiceId, invoiceItemId, function(err, invoiceItem) {
+    invoiceItemAPI.readInvoiceItem(invoiceId, invoiceItemId,
+     function(err, invoiceItem) {
       if (err) {
         throw err;
       }
@@ -50,7 +51,8 @@ var invoiceItem = function(app) {
 
   app.delete('/invoiceItem/delete', function(req, res) {
     console.log(req.body);
-    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId, req.body.invoiceItemId, function(err, invoice) {
+    invoiceItemAPI.deleteInvoiceItem(req.body.invoiceId,
+     req.body.invoiceItemId, function(err, invoice) {
       if (err) {
         throw err;
       }

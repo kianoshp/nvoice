@@ -8,9 +8,9 @@ var superagent = require('superagent');
 describe('Invoice item tests', function() {
 
   var URL = 'https://localhost:4443';
-  var currentInvoiceId = "558317feee627fa68f5aab21";
+  var currentInvoiceId = '558317feee627fa68f5aab21';
   var invoiceItemObj = {
-    invoiceId: "558317feee627fa68f5aab21",
+    invoiceId: '558317feee627fa68f5aab21',
     description: 'item on invoice',
     qty: 5,
     rate: 10,
@@ -18,7 +18,7 @@ describe('Invoice item tests', function() {
   };
   var currentItemId;
   var modifiedItem = {
-    invoiceId: "558317feee627fa68f5aab21",
+    invoiceId: '558317feee627fa68f5aab21',
     description: 'item on invoice',
     qty: 100,
     rate: 10,
