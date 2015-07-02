@@ -7,9 +7,9 @@ var company = function(app) {
   app.post('/company/create', function(req, res) {
     var thisCompany = companyAPI.createCompanyObj(req);
 
-    companyAPI.createCompany(thisCompany, function(err, companyObj) {
+    companyAPI.createCompany(thisCompany, function(err, companyObj, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(companyObj);
@@ -18,9 +18,9 @@ var company = function(app) {
 
   app.get('/company/read', function(req, res) {
     var companyId = req.query.companyId || req.body.companyId;
-    companyAPI.readCompany(companyId, function(err, company) {
+    companyAPI.readCompany(companyId, function(err, company, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(company);
@@ -29,9 +29,9 @@ var company = function(app) {
 
   app.put('/company/update', function(req, res) {
     companyAPI.updateCompany(req.body.companyId,
-      req.body.companyObj, {new: true}, function(err, company) {
+      req.body.companyObj, {new: true}, function(err, company, next) {
       if (err) {
-        throw err;
+        next(err);
       }
 
       res.json(company);

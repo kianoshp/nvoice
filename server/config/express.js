@@ -132,6 +132,19 @@ var expressConfig = function(app, express) {
   // Load routes
   require(path.join(settings.root, './server/routes'))(app);
 
+  // Error middleware
+  app.use(function(err, req, res, next) {
+    var status = err.status || 500;
+    var message = err.message;
+
+    console.log(status);
+    console.log(message);
+
+    res.status(status);
+    res.send(message);
+    next();
+  });
+
   // 404 Error Handler
   app.use(function(req, res) {
     res.status(404);

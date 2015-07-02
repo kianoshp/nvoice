@@ -19,23 +19,23 @@ var userAPI = {
   },
 
   createUser: function(userObject, cb) {
-    userObject.save(function(err, doc) {
+    userObject.save(function(err, doc, next) {
 
-      cb(err, doc);
+      cb(err, doc, next);
     });
   },
 
   readUser: function(userId, cb) {
-    User.findById(userId, function(err, doc) {
+    User.findById(userId, function(err, doc, next) {
 
-      cb(err, doc);
+      cb(err, doc, next);
     });
   },
 
   updateUser: function(userId, userObj, options, cb) {
-    User.findByIdAndUpdate(userId, userObj, options, function(err, doc) {
+    User.findByIdAndUpdate(userId, userObj, options, function(err, doc, next) {
 
-      cb(err, doc);
+      cb(err, doc, next);
     });
   },
 
